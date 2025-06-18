@@ -1,0 +1,12 @@
+<mat-toolbar [ngClass]="{'dark-mode-toolbar': isDarkMode, 'light-mode-toolbar': !isDarkMode}">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>language</mat-icon>
+  </button>
+  <span>BE - Français</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="toggleTheme()">
+    <mat-icon>{{ isDarkMode ? 'dark_mode' : 'light_mode' }}</mat-icon>
+  </button>
+  <span>Thème</span>
+</mat-toolbar>
+
