@@ -4,6 +4,10 @@ mat-toolbar {
   height: 2vw;
 }
 
+.custom-button {
+  font-size: 17px;
+}
+
 /* Change color for dark mode */
 .dark-mode-toolbar {
   background-color: #b6dcf1;
@@ -12,13 +16,22 @@ mat-toolbar {
   mat-icon {
     color: #2b2b2b;
   }
+
+  .custom-button {
+    color: #2b2b2b;
+  }
 }
 
 /* Change color for light mode */
 .light-mode-toolbar {
   background-color: #0e3449;
   color: #d4d4d4;
+
   mat-icon {
+    color: #d4d4d4;
+  }
+
+  .custom-button {
     color: #d4d4d4;
   }
 }

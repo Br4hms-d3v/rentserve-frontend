@@ -5,11 +5,12 @@ import {MatIconModule} from '@angular/material/icon';
 import {Subscription} from 'rxjs';
 import {ThemeService} from '../../../core/services/theme.service';
 import {NgClass} from '@angular/common';
+import {MatMenuModule} from '@angular/material/menu';
 
 @Component({
   selector: 'app-header',
   imports: [
-    MatToolbarModule, MatButtonModule, MatIconModule, NgClass
+    MatToolbarModule, MatButtonModule, MatIconModule, MatMenuModule, NgClass
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -18,6 +19,8 @@ import {NgClass} from '@angular/common';
 export class HeaderComponent implements OnInit, OnDestroy {
   isDarkMode: boolean = false;
   themeSubscription: Subscription | undefined;
+
+  selectedLanguage: string = 'fr';
 
   constructor(private themeService: ThemeService) {
   }
@@ -38,6 +41,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleTheme(): void {
     this.themeService.toggleTheme();
+  }
+
+  selectLanguage(language: string) {
+    this.selectedLanguage = language;
+    console.log(this.selectedLanguage);
   }
 
 }
