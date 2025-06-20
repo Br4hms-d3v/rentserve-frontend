@@ -1,13 +1,36 @@
-<mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
+<mat-toolbar [ngClass]="{'dark-mode': isDarkMode, 'light-mode': !isDarkMode}">
+  <!-- Logo is on left -->
+  <img src="assets/logo.png" alt="Logo" class="logo">
+  <span id="logoText">Rent-Serve</span>
+
+  <!-- Space between buttons -->
+  <span class="spacer"></span>
+
+  <!-- First button materials  -->
+  <button mat-fab extended class="btn-rentServeBasket">
+    <mat-icon>construction</mat-icon>
+    Matériels
   </button>
-  <span>My App</span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
+
+  <!-- Second button serves -->
+  <button mat-fab extended class="btn-rentServeBasket">
+    Services
+    <mat-icon>volunteer_activism</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
+
+  <!-- Space between buttons -->
+  <span class="spacer"></span>
+
+  <!-- Thirds button basket -->
+  <button mat-fab extended class="btn-rentServeBasket">
+    <span>Panier</span>
+    <mat-icon>shopping_basket</mat-icon>
   </button>
+
+  <!-- The right button for connect -->
+  <button mat-fab extended class="btn-login">
+    <span>Connexion</span>
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
 </mat-toolbar>
