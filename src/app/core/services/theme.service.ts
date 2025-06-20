@@ -6,14 +6,14 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class ThemeService {
 
-  private isDarkModeSubject = new BehaviorSubject<boolean>(false);  // Par défaut, mode sombre
-  public isDarkMode$ = this.isDarkModeSubject.asObservable();
+  private darkMode = new BehaviorSubject<boolean>(false);  // Par défaut, mode sombre
+  public darkMode$ = this.darkMode.asObservable();
 
   toggleTheme(): void {
-    this.isDarkModeSubject.next(!this.isDarkModeSubject.value);
+    this.darkMode.next(!this.darkMode.value);
   }
 
-  getThemeState(): boolean {
-    return this.isDarkModeSubject.value;
+  isDarkMode(): boolean {
+    return this.darkMode.value;
   }
 }
