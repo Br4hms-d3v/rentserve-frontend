@@ -1,9 +1,16 @@
 .scroll-container {
   height: 100vh;
-  //overflow-y: scroll;
-  //scroll-snap-type: y mandatory;
-  //scroll-behavior: smooth;
-  //overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  /* Masquer le scrollbar mais permettre le défilement */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Masquer le scrollbar pour Chrome, Safari et Opera */
+.scroll-container::-webkit-scrollbar {
+  display: none;
 }
 
 .article {
