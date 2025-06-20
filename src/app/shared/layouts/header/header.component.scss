@@ -1,7 +1,7 @@
 /* The size of header */
 mat-toolbar {
   font-size: 17px;
-  height: 2vw;
+  height: 2.5vw;
 }
 
 .custom-button {
@@ -10,29 +10,33 @@ mat-toolbar {
 
 /* Change color for dark mode */
 .dark-mode-toolbar {
-  background-color: #b6dcf1;
-  color: #2b2b2b;
+  background-color: #0e3449;
+  color: #cbd1c1;
 
+  // Change color for icons
   mat-icon {
-    color: #2b2b2b;
+    color: #cbd1c1;
   }
 
+  // Change color for button
   .custom-button {
-    color: #2b2b2b;
+    color: #cbd1c1;
   }
 }
 
 /* Change color for light mode */
 .light-mode-toolbar {
-  background-color: #0e3449;
-  color: #d4d4d4;
+  background-color: #387190;
+  color: #f0f0f0;
 
+  // Change color for icons
   mat-icon {
-    color: #d4d4d4;
+    color: #f0f0f0;
   }
 
+  // Change color for button
   .custom-button {
-    color: #d4d4d4;
+    color: #f0f0f0;
   }
 }
 
