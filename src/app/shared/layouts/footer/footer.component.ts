@@ -1,11 +1,27 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MatToolbar} from '@angular/material/toolbar';
+import {NgClass} from '@angular/common';
+import {ThemeService} from '../../../core/services/theme.service';
 
 @Component({
   selector: 'app-footer',
-    imports: [],
+  imports: [
+    MatToolbar,
+    NgClass
+  ],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss'
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
+
+  isDarkMode = false;
+
+  constructor(private themeService: ThemeService) {
+  }
+
+  ngOnInit(): void {
+    this.isDarkMode = this.themeService.isDarkMode();
+    this.themeService.darkMode$.subscribe(mode => this.isDarkMode = mode);
+  }
 
 }
