@@ -1,0 +1,46 @@
+/* The size of header */
+mat-toolbar {
+  font-size: 17px;
+  height: 2.5vw;
+}
+
+.custom-button {
+  font-size: 17px;
+}
+
+/* Change color for dark mode */
+.dark-mode-toolbar {
+  background-color: #0e3449;
+  color: #cbd1c1;
+
+  // Change color for icons
+  mat-icon {
+    color: #cbd1c1;
+  }
+
+  // Change color for button
+  .custom-button {
+    color: #cbd1c1;
+  }
+}
+
+/* Change color for light mode */
+.light-mode-toolbar {
+  background-color: #387190;
+  color: #f0f0f0;
+
+  // Change color for icons
+  mat-icon {
+    color: #f0f0f0;
+  }
+
+  // Change color for button
+  .custom-button {
+    color: #f0f0f0;
+  }
+}
+
+/* Flexible spacing for the toolbar */
+.example-spacer {
+  flex: 1 1 auto;
+}

@@ -1,0 +1,36 @@
+<mat-toolbar [ngClass]="{'dark-mode': isDarkMode, 'light-mode': !isDarkMode}">
+  <!-- Logo is on left -->
+  <img src="/logo/logo_rentserve.jpg" alt="Logo" class="logo">
+  <span id="logoText">Rent-Serve</span>
+
+  <!-- Space between buttons -->
+  <span class="spacer"></span>
+
+  <!-- First button materials  -->
+  <button mat-fab extended class="btn-rentServeBasket">
+    <mat-icon>construction</mat-icon>
+    Matériels
+  </button>
+
+  <!-- Second button serves -->
+  <button mat-fab extended class="btn-rentServeBasket">
+    Services
+    <mat-icon>volunteer_activism</mat-icon>
+  </button>
+
+  <!-- Space between buttons -->
+  <span class="spacer"></span>
+
+  <!-- Thirds button basket -->
+  <button mat-fab extended class="btn-rentServeBasket">
+    <span>Panier</span>
+    <mat-icon>shopping_basket</mat-icon>
+  </button>
+
+  <!-- The right button for connect -->
+  <button mat-fab extended class="btn-login">
+    <span>Connexion</span>
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+</mat-toolbar>
