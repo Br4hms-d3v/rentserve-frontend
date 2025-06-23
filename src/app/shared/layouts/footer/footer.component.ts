@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {MatToolbar} from '@angular/material/toolbar';
 import {NgClass} from '@angular/common';
 import {ThemeService} from '../../../core/services/theme.service';
 
 @Component({
   selector: 'app-footer',
   imports: [
-    MatToolbar,
     NgClass
   ],
   templateUrl: './footer.component.html',
