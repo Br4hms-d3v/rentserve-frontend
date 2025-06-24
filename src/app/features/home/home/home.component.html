@@ -5,19 +5,21 @@
     <mat-grid-tile>
       <div class="presentationRentServe">
         <p>
-          Louer ou prêter du matériel facilement, tout en permettant à la communauté de s'entraider contre rémunération. Profitez d'une plateforme sécurisée pour économiser ou rentabiliser vos équipements. Inscrivez-vous maintenant et commencez à partager !
+          Louer ou prêter du matériel facilement, tout en permettant à la communauté de s'entraider contre rémunération.
+          Profitez d'une plateforme sécurisée pour économiser ou rentabiliser vos équipements.<br/>
+          Inscrivez-vous maintenant et commencez à partager !
         </p>
       </div>
     </mat-grid-tile>
 
     <!-- logo -->
     <mat-grid-tile>
-      <img src="/logo/logo.jpg" alt="Logo" class="logo">
+      <img ngSrc="/logo/logo.jpg" alt="Logo" class="logo" fill>
     </mat-grid-tile>
 
     <!-- Registration -->
     <mat-grid-tile>
-      <form>
+      <form class="form-register">
         <h5>Inscription</h5>
         <div class="form-group-register">
           <mat-form-field appearance="outline">
@@ -52,8 +54,8 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Mot de passe</mat-label>
-            <input type="password" matInput placeholder="Mot de passe">
-            <mat-icon matSuffix>password</mat-icon>
+            <input type="password" matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'">
+            <mat-icon matPrefix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
           </mat-form-field>
         </div>
 
@@ -66,55 +68,114 @@
 
   <!-- Second Grid -->
   <mat-grid-list cols="3" rowHeight="1:1" class="article-2">
-    <!-- -->
+    <!-- Rent a material -->
     <mat-grid-tile>
-      1
+      <div>
+        <h5 class="titleHomePresentation">Mettez vos outils en location</h5>
+        <img src="/picturesDev/outillages.png" alt="louer outils" class="imgHomePresentation"/>
+      </div>
     </mat-grid-tile>
 
     <!-- -->
     <mat-grid-tile>
-      2
+      <div>
+        <img src="/picturesDev/rendre_service.png" alt="rendre services" class="imgHomePresentation"/>
+        <h5 class="titleHomePresentation">Mettez vos outils en location</h5>
+      </div>
     </mat-grid-tile>
 
     <!-- -->
     <mat-grid-tile>
-      3
+      <div>
+        <h5 class="titleHomePresentation">Gagner de l'argent</h5>
+        <img src="/picturesDev/rendre_service.png" alt="rendre services" class="imgHomePresentation"/>
+      </div>
     </mat-grid-tile>
   </mat-grid-list>
 
   <!-- third Grid -->
-  <mat-grid-list cols="3" rowHeight="1:1" class="article-3">
-    <!-- -->
-    <mat-grid-tile>
-      1
-    </mat-grid-tile>
+  <mat-grid-list cols="3" rowHeight="3:1" class="article-3">
+    <!-- Carousel for pictures -->
+    <div class="carousel-picture">
+      <div class="carousel-track">
+        <div class="carousel-item">
+          <img src="/picturesDev/outillages.png" alt="Image"/>
+        </div>
+        <!-- Dupliquer les items pour la boucle -->
+        <div class="carousel-item">
+          <img src="/picturesDev/rendre_service.png" alt="Image"/>
+        </div>
+        <div class="carousel-item">
+          <img src="/picturesDev/outillages.png" alt="Image"/>
+        </div>
+        <!-- Dupliquer les items pour la boucle -->
+        <div class="carousel-item">
+          <img src="/picturesDev/rendre_service.png" alt="Image"/>
+        </div>
+        <div class="carousel-item">
+          <img src="/picturesDev/outillages.png" alt="Image"/>
+        </div>
+        <!-- Dupliquer les items pour la boucle -->
+        <div class="carousel-item">
+          <img src="/picturesDev/rendre_service.png" alt="Image"/>
+        </div>
+        <div class="carousel-item">
+          <img src="/picturesDev/outillages.png" alt="Image"/>
+        </div>
+        <!-- Dupliquer les items pour la boucle -->
+        <div class="carousel-item">
+          <img src="/picturesDev/rendre_service.png" alt="Image"/>
+        </div>
+        <div class="carousel-item">
+          <img src="/picturesDev/outillages.png" alt="Image"/>
+        </div>
+        <!-- Dupliquer les items pour la boucle -->
+        <div class="carousel-item">
+          <img src="/picturesDev/rendre_service.png" alt="Image"/>
+        </div>
+      </div>
+    </div>
 
-    <!-- -->
-    <mat-grid-tile>
-      2
-    </mat-grid-tile>
-    <!-- -->
-
-    <mat-grid-tile>
-      3
-    </mat-grid-tile>
+    <!-- Carousel for reviews -->
+    <div class="carousel-review">
+      <div class="carousel-track">
+        <div class="carousel-item">
+          <img src="/picturesDev/outillages.png" alt="Image"/>
+        </div>
+        <!-- Dupliquer les items pour la boucle -->
+        <div class="carousel-item">
+          <img src="/picturesDev/rendre_service.png" alt="Image"/>
+        </div>
+        <div class="carousel-item">
+          <img src="/picturesDev/outillages.png" alt="Image"/>
+        </div>
+        <!-- Dupliquer les items pour la boucle -->
+        <div class="carousel-item">
+          <img src="/picturesDev/rendre_service.png" alt="Image"/>
+        </div>
+        <div class="carousel-item">
+          <img src="/picturesDev/outillages.png" alt="Image"/>
+        </div>
+        <!-- Dupliquer les items pour la boucle -->
+        <div class="carousel-item">
+          <img src="/picturesDev/rendre_service.png" alt="Image"/>
+        </div>
+        <div class="carousel-item">
+          <img src="/picturesDev/outillages.png" alt="Image"/>
+        </div>
+        <!-- Dupliquer les items pour la boucle -->
+        <div class="carousel-item">
+          <img src="/picturesDev/rendre_service.png" alt="Image"/>
+        </div>
+        <div class="carousel-item">
+          <img src="/picturesDev/outillages.png" alt="Image"/>
+        </div>
+        <!-- Dupliquer les items pour la boucle -->
+        <div class="carousel-item">
+          <img src="/picturesDev/rendre_service.png" alt="Image"/>
+        </div>
+      </div>
+    </div>
   </mat-grid-list>
 
-  <!-- fourth Grid -->
-  <mat-grid-list cols="3" rowHeight="1:1" class="article-4">
-    <!-- -->
-    <mat-grid-tile>
-      1
-    </mat-grid-tile>
-
-    <!-- -->
-    <mat-grid-tile>
-      2
-    </mat-grid-tile>
-
-    <!-- -->
-    <mat-grid-tile>
-      3
-    </mat-grid-tile>
-  </mat-grid-list>
 </div>
