@@ -4,12 +4,12 @@
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
-  ///* Masquer le scrollbar mais permettre le défilement */
+  ///Masquer le scrollbar mais permettre le défilement
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
 
-/* Masquer le scrollbar pour Chrome, Safari et Opera */
+// Masquer le scrollbar pour Chrome, Safari et Opera
 .scroll-container::-webkit-scrollbar {
   display: none;
 }
@@ -26,11 +26,16 @@ mat-grid-list {
   box-sizing: border-box;
 }
 
-.presentationRentServe{
+
+/**
+ * First Grid
+ **/
+.presentationRentServe {
   height: 600px;
   margin-left: 22px;
   margin-right: 25px;
   text-align: center;
+  font-size: 40.5px;
   font-family: 'Libre Baskerville italic', serif;
 }
 
@@ -40,15 +45,24 @@ mat-grid-list {
   width: 600px;
 }
 
-h5{
+// Div for form register
+.form-register {
+  height: 650px;
+}
+
+// title for registration
+h5 {
   text-align: center;
   font-family: 'Libre Baskerville italic', serif;
 }
+
 // space between input form
 mat-form-field {
-  margin-left: 10px;
+  width: 230px;
+  margin-left: 15px;
 }
 
+// Button style for registration
 .btn-register {
   display: flex;
   justify-content: center;
@@ -56,9 +70,99 @@ mat-form-field {
   padding: 10px 20px;
 }
 
-/*
- * Style for light mode
+
+/**
+ * Second Grid
+ **/
+
+//
+.imgHomePresentation {
+  width: 400px;
+}
+
+.titleHomePresentation {
+  text-align: center;
+  font-family: 'Libre Baskerville italic', serif;
+}
+
+
+/**
+ * Third Grid
  */
+// Carrousel for pictures
+.carousel-picture {
+  overflow: hidden;
+  width: 100%;
+  height: 250px;
+  position: relative;
+
+  .carousel-track {
+    display: flex;
+    animation: scroll-left 30s linear infinite;
+  }
+
+  .carousel-item {
+    flex: 0 0 auto;
+    width: 250px;
+    height: 250px;
+    margin-right: 25px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+// Carrousel for Reviews
+.carousel-review {
+  overflow: hidden;
+  width: 100%;
+  height: 250px;
+  position: relative;
+
+  .carousel-track {
+    display: flex;
+    animation: scroll 30s linear infinite;
+  }
+
+  .carousel-item {
+    flex: 0 0 auto;
+    width: 250px;
+    height: 250px;
+    margin-right: 25px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+/**
+ * Style for light mode
+ **/
 .light-mode {
 
   // Section color
@@ -107,9 +211,9 @@ mat-form-field {
 }
 
 
-/*
+/**
  * Style for dark mode
- */
+ **/
 .dark-mode {
 
   // Section color
