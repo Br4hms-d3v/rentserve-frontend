@@ -1,0 +1,5 @@
+export const environment = {
+  production: false, // Not production mode (for dev only)
+  apiBaseUrl: 'http://localhost:8080',   // Base URL of the backend API
+  authEndPoint: '/api/auth',  // Path for authentication routes
+}
