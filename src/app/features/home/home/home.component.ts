@@ -22,15 +22,16 @@ import {ThemeService} from '../../../core/services/theme.service';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  isDarkMode = false;
-  hide = true;
+  isDarkMode = false; // Store dark mode state (true or false)
+  hide = true; // Control password visibility (true = hidden)
 
+  // Inject the theme service (for dark mode)
   constructor(private themeService: ThemeService) {
   }
 
   ngOnInit(): void {
-    this.isDarkMode = this.themeService.isDarkMode();
-    this.themeService.darkMode$.subscribe((mode: boolean) => this.isDarkMode = mode);
+    this.isDarkMode = this.themeService.isDarkMode(); // Get current theme (dark or light)
+    this.themeService.darkMode$.subscribe((mode: boolean) => this.isDarkMode = mode); // Watch changes in dark mode (reactive)
   }
 
 }
