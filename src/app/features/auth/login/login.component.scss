@@ -1,0 +1,34 @@
+// Title inside form
+h2 {
+  text-align: center;
+}
+
+// Modal size and position
+mat-dialog-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/**
+ This is for form login
+ */
+.login-form {
+  text-align: center;
+  align-items: center;
+
+  .input-login {
+    margin-top: 15px;
+  }
+
+  .input-login, matInput {
+    width: 100%;
+  }
+}
+
+// Message Error
+.msgError {
+  color: red;
+  font-size: 15px;
+}

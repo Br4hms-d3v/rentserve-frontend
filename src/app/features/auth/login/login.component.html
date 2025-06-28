@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Connexion</h2>
+
+@if (message) {
+  <div class="msgError">
+    {{ message }}
+  </div>
+}
+
+<mat-dialog-content>
+  <form [formGroup]="loginForm" (ngSubmit)="sign()" class="login-form">
+    @if (loginForm.get('pseudo')!.hasError('required') && loginForm.get('pseudo')?.touched) {
+      <p class="msgError"> Veuillez entrer votre email</p>
+    }
+    <mat-form-field class="input-login">
+      <mat-label>Email ou pseudo</mat-label>
+      <input type="text" matInput id="pseudo" formControlName="pseudo"
+             placeholder="Entrez votre email">
+    </mat-form-field>
+
+    @if (loginForm.get('password')!.hasError('required') && loginForm.get('password')?.touched) {
+      <p class="msgError"> Entrez un mot de passe valide !</p>
+    }
+    <mat-form-field class="input-login">
+      <mat-label>Mot de passe</mat-label>
+      <input type="password" matInput [type]="hidePassword ? 'password' : 'text'" id="password"
+             formControlName="password" placeholder="Entrez votre mot de passe">
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Retour</button>
+      <button mat-button [disabled]="loginForm.invalid">Se connecter</button>
+    </mat-dialog-actions>
+
+  </form>
+</mat-dialog-content>
