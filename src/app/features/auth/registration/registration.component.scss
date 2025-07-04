@@ -1,0 +1,128 @@
+@use '@angular/material' as mat;
+
+// space between input form
+mat-form-field {
+  width: 230px;
+  margin-left: 15px;
+}
+
+// Button style for registration
+.btn-register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+
+/**
+ * Style for light mode
+ **/
+.light-mode {
+
+  // Section color
+  .article-1, .article-3 {
+    color: #545E4C;
+  }
+
+  .article-2, .article-4 {
+    background-color: #6D7C5F;
+    color: #F0F0F0;
+  }
+
+  // Color for form registration
+  .form-group-register {
+    @include mat.form-field-overrides((
+      outlined-outline-color: #6D7C5F,
+      outlined-focus-outline-color: #6D7C5F,
+      outlined-caret-color: #6D7C5F,
+      outlined-hover-outline-color: #6D7C5F,
+      outlined-label-text-color: #6D7C5F,
+      outlined-focus-label-text-color: #6D7C5F,
+      outlined-hover-label-text-color: #4E9442,
+      outlined-input-text-placeholder-color:#4E9442,
+    ));
+  }
+
+  // Button registration only
+  .btn-register .mat-mdc-button-base {
+    color: #6D7C5F;
+    --mdc-outlined-button-outline-color: #6D7C5F;
+    --mat-outlined-button-ripple-color: #6D7C5F;
+    --mat-outlined-button-state-layer-color: #6D7C5F;
+    --mat-outlined-button-hover-state-layer-opacity: 0.10;
+    --mat-outlined-button-focus-state-layer-opacity: 0.10;
+    --mat-outlined-button-pressed-state-layer-opacity: 0.10;
+    --mdc-outlined-button-label-text-weight: 400;
+    --mdc-outlined-button-label-text-size: 17px;
+  }
+
+  // Button registration only on hover
+  .btn-register .mat-mdc-button-base:hover {
+    color: white;
+    --mat-outlined-button-hover-state-layer-opacity: 0.60;
+  }
+
+}
+
+
+/**
+ * Style for dark mode
+ **/
+.dark-mode {
+
+  // Section color
+  .article-1, .article-3 {
+    background-color: #2B2B2B;
+    color: #CBD1C1;
+  }
+
+  .article-2, .article-4 {
+    background-color: #454D3E;
+    color: #CBD1C1;
+  }
+
+  // Color for form registration
+  .form-group-register {
+    @include mat.form-field-overrides((
+      outlined-outline-color: #CBD1C1,
+      outlined-focus-outline-color: #CBD1C1,
+      outlined-caret-color: #CBD1C1,
+      outlined-hover-outline-color: #CBD1C1,
+      outlined-label-text-color: #CBD1C1,
+      outlined-focus-label-text-color: #CBD1C1,
+      outlined-hover-label-text-color: #BAF2B5,
+      outlined-input-text-placeholder-color:#BAF2B5,
+      outlined-input-text-color: #CCD5B9,
+    ));
+  }
+
+  // Button registration only
+  .btn-register .mat-mdc-button-base {
+    color: #CCD5B9;
+    --mdc-outlined-button-outline-color: #CCD5B9;
+    --mat-outlined-button-ripple-color: #CCD5B9;
+    --mat-outlined-button-state-layer-color: #CCD5B9;
+    --mat-outlined-button-hover-state-layer-opacity: 0.10;
+    --mat-outlined-button-focus-state-layer-opacity: 0.10;
+    --mat-outlined-button-pressed-state-layer-opacity: 0.10;
+    --mdc-outlined-button-label-text-weight: 400;
+    --mdc-outlined-button-label-text-size: 17px;
+  }
+
+  // Button registration only on hover
+  .btn-register .mat-mdc-button-base:hover {
+    color: white;
+    --mat-outlined-button-hover-state-layer-opacity: 0.60;
+  }
+}
+
+.msgError{
+  color: red;
+  font-size: 15px;
+}
+
+.msgSuccess{
+  color: green;
+  font-size: 15px;
+}

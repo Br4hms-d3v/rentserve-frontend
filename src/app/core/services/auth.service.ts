@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable, tap} from 'rxjs';
 import {UserModel} from '../../features/auth/model/user';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LoginModel} from '../../features/auth/model/login';
+import {RegistrationModel} from '../../features/auth/model/registration';
 
 @Injectable({
   providedIn: 'root'
@@ -39,9 +40,22 @@ export class AuthService {
         // Save user in memory
         this._currentUser.next(data);
         // Save user in localStorage
-        localStorage.setItem('currentUser', JSON.stringify(data));
+        localStorage.setItem('currentUser', JSON.stringify(data.token));
       }
     ));
+  }
+
+  register(form: RegistrationModel): Observable<UserModel> {
+    return this._http.post<UserModel>(this.apiUrl + "/registration", form, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }).pipe(tap(
+      (data) => {
+        this._currentUser.next(data);
+        localStorage.setItem('currentUser', JSON.stringify(data.token));
+      }
+    ))
   }
 
   /**

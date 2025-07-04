@@ -1,0 +1,96 @@
+@if (message) {
+  <div class="msgError">
+    {{ message }}
+  </div>
+} @else if (messageSuccess) {
+  <div class="msgSuccess">
+    {{ messageSuccess }}
+  </div>
+}
+<form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()"
+      [ngClass]="{'dark-mode': isDarkMode, 'light-mode': !isDarkMode}">
+  <div class="form-group-register">
+    <mat-form-field appearance="outline">
+      <mat-label>Nom</mat-label>
+      <input matInput placeholder="Entrez votre nom" formControlName="name">
+      <mat-error>Le nom est obligatoire</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Prénom</mat-label>
+      <input matInput placeholder="Entrez votre prénom" formControlName="firstName">
+      <mat-error>Le prénom est obligatoire</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group-register">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput placeholder="adresse@email.com" formControlName="email">
+      <mat-icon matSuffix>alternate_email</mat-icon>
+      <mat-error>L'adresse email est requise.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Mot de passe</mat-label>
+      <input type="password" matInput placeholder="Mot de passe" formControlName="password"
+             [type]="hidePassword ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-error>Le mot de passe email est requis.</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group-register">
+    <mat-form-field appearance="outline">
+      <mat-label>Pseudo</mat-label>
+      <input matInput placeholder="Entrez votre pseudo" formControlName="pseudo">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      @if (registerForm.get('pseudo')!.hasError('minlength')) {
+        <mat-error>Le pseudo doit contenir au moins 3 caractères</mat-error>
+      }
+      @if (registerForm.get('pseudo')!.hasError('maxlength')) {
+        <mat-error>Le pseudo ne doit pas dépasser 100 caractères.</mat-error>
+      }
+      @if (registerForm.get('pseudo')!.hasError('required')) {
+        <mat-error>Le pseudo est obligatoire.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Date de naissance</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="birthdate">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error>Date de naissance est obligatoire</mat-error>
+    </mat-form-field>
+  </div>
+
+
+  <div class="form-group-register">
+    <mat-form-field appearance="outline">
+      <mat-label>Rue</mat-label>
+      <input matInput placeholder="numéro + adresse" formControlName="street">
+      <mat-error>L'adresse est important</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>ville</mat-label>
+      <input matInput placeholder="Nom de la ville" formControlName="city">
+      <mat-error>Le nom de la ville est important</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group-register">
+    <mat-form-field appearance="outline">
+      <mat-label>Code postal</mat-label>
+      <input matInput placeholder="Entrez le code postal" formControlName="zipCode">
+      <mat-error>Le code postal est important</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="btn-register">
+    <button type="submit" mat-stroked-button>S'inscrire</button>
+  </div>
+
+</form>

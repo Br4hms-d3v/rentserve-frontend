@@ -5,8 +5,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatButton} from '@angular/material/button';
 import {ThemeService} from '../../../core/services/theme.service';
+import {ReactiveFormsModule} from '@angular/forms';
+import {RegistrationComponent} from '../../auth/registration/registration.component';
 
 @Component({
   selector: 'app-home',
@@ -16,14 +17,13 @@ import {ThemeService} from '../../../core/services/theme.service';
     MatGridListModule,
     MatFormFieldModule, MatInputModule,
     MatIconModule, MatDatepickerModule,
-    MatButton, NgOptimizedImage
+    NgOptimizedImage, ReactiveFormsModule, RegistrationComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
   isDarkMode = false; // Store dark mode state (true or false)
-  hide = true; // Control password visibility (true = hidden)
 
   // Inject the theme service (for dark mode)
   constructor(private themeService: ThemeService) {
