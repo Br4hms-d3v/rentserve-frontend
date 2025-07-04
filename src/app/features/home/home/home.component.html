@@ -19,50 +19,9 @@
 
     <!-- Registration -->
     <mat-grid-tile>
-      <form class="form-register">
-        <h5>Inscription</h5>
-        <div class="form-group-register">
-          <mat-form-field appearance="outline">
-            <mat-label>Nom</mat-label>
-            <input matInput placeholder="Entrez votre nom">
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Prénom</mat-label>
-            <input matInput placeholder="Entrez votre prénom">
-          </mat-form-field>
-        </div>
-
-        <div class="form-group-register">
-          <mat-form-field appearance="outline">
-            <mat-label>Pseudo</mat-label>
-            <input matInput placeholder="Entrez votre pseudo">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input type="email" matInput placeholder="adresse@email.com">
-            <mat-icon matPrefix>alternate_email</mat-icon>
-          </mat-form-field>
-        </div>
-
-        <div class="form-group-register">
-          <mat-form-field appearance="outline">
-            <mat-label>Date de naissance</mat-label>
-            <input matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Mot de passe</mat-label>
-            <input type="password" matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'">
-            <mat-icon matPrefix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-          </mat-form-field>
-        </div>
-
-        <div class="btn-register">
-          <button mat-stroked-button>S'inscrire</button>
-        </div>
-      </form>
+      <div class="form-register">
+        <app-registration/>
+      </div>
     </mat-grid-tile>
   </mat-grid-list>
 
