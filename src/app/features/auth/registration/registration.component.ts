@@ -71,9 +71,13 @@ export class RegistrationComponent implements OnInit {
 
     // Create an account for user using the auth service
     this._autService.register(this.registerForm.value).subscribe({
+
       next: () => {
         this.messageSuccess = "Veuillez vérifier votre boîte email pour activer votre compte."
         this._router.navigate(['/']);
+        this.registerForm.clearValidators(); // Clear the validator
+        this.registerForm.reset(); // Clear the form
+
       },
       error: (error) => {
         if (typeof error.error) {
@@ -83,11 +87,9 @@ export class RegistrationComponent implements OnInit {
         } else {
           this.message = 'Erreur d\'inscription;';
         }
-
       }
-    })
 
-    this.registerForm.reset();
+    })
 
   }
 
