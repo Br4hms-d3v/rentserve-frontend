@@ -45,6 +45,10 @@ export class AuthService {
     ));
   }
 
+  isAuthenticated() {
+    return !!this.currentUser;
+  }
+
   register(form: RegistrationModel): Observable<UserModel> {
     return this._http.post<UserModel>(this.apiUrl + "/registration", form, {
       headers: new HttpHeaders({
