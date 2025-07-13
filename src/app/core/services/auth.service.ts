@@ -12,15 +12,15 @@ import {RegistrationModel} from '../../features/auth/model/registration';
 export class AuthService {
 
   private apiUrl = environment.apiBaseUrl + environment.authEndPoint; // API base URL + endpoint for auth (login)
-  private _currentUser !: BehaviorSubject<UserModel>; // Save the current user (as an observable)
+  private _currentUser !: BehaviorSubject<UserModel | null>; // Save the current user (as an observable)
 
   constructor(private readonly _http: HttpClient) {
     let potentialUser = localStorage.getItem('currentUser'); // Try to read user from localStorage
-    this._currentUser = new BehaviorSubject<UserModel>(potentialUser ? JSON.parse(potentialUser) : null); // If user exists, set it; if not, use null
+    this._currentUser = new BehaviorSubject<UserModel | null>(potentialUser ? JSON.parse(potentialUser) : null); // If user exists, set it; if not, use null
   }
 
   // Get the current user value (not observable)
-  get currentUser(): UserModel {
+  get currentUser(): UserModel | null {
     return this._currentUser.value;
   }
 
@@ -45,10 +45,6 @@ export class AuthService {
     ));
   }
 
-  isAuthenticated() {
-    return !!this.currentUser;
-  }
-
   register(form: RegistrationModel): Observable<UserModel> {
     return this._http.post<UserModel>(this.apiUrl + "/registration", form, {
       headers: new HttpHeaders({
@@ -67,6 +63,10 @@ export class AuthService {
    */
   logout() {
     localStorage.removeItem('currentUser');
+    this._currentUser.next(null);
   }
 
+  isAuthenticated() {
+    return !!this.currentUser;
+  }
 }
