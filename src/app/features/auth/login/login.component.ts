@@ -1,9 +1,9 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, inject, Inject, OnInit} from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogClose,
   MatDialogActions,
-  MatDialogContent, MatDialogTitle
+  MatDialogContent, MatDialogTitle, MatDialogRef
 } from '@angular/material/dialog';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatFormField, MatInput} from '@angular/material/input';
@@ -19,7 +19,6 @@ import {MatIcon} from '@angular/material/icon';
   imports: [
 
     MatButton,
-
     MatFormField,
     MatInput,
     MatFormFieldModule,
@@ -42,6 +41,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any, // Catch data's dialogue from nav
+    @Inject(MatDialogRef) private dialogRef: MatDialogRef<LoginComponent>, // Catch data's dialogue from nav
     private readonly fb: FormBuilder, // Create a Form
     private readonly _authServ: AuthService, // service to manage auth
     private readonly _router: Router, // Tool to navigate
@@ -71,6 +71,8 @@ export class LoginComponent implements OnInit {
       next: (user) => { //If the connection is successful, the response contains the user
         this.message = "Bienvenu sur la plateforme";
         localStorage.setItem('authToken', user.token); // Save token in browser
+        this._router.navigate(['/dashboard']);
+        this.dialogRef.close();
       }
       ,
       error: (error) => { // Login error
