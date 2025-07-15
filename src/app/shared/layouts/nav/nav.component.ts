@@ -22,6 +22,7 @@ import {Router} from '@angular/router';
 export class NavComponent implements OnInit {
 
   isDarkMode = false;
+  firstname: string | undefined;
 
   constructor(
     private themeService: ThemeService,
@@ -34,6 +35,7 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.isDarkMode = this.themeService.isDarkMode();
     this.themeService.darkMode$.subscribe(mode => this.isDarkMode = mode);
+    this.firstname = localStorage.getItem('authFirstname') || undefined;
   }
 
   // Open modal for login

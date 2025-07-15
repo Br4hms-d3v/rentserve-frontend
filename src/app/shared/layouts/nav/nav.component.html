@@ -37,7 +37,7 @@
   @if (isAuthenticated()) {
     <button type="button" [matMenuTriggerFor]="settingsMenu">
       <mat-icon>account_circle</mat-icon>
-      Le Nom du pseudo
+      {{ firstname }}
     </button>
 
     <mat-menu #settingsMenu>

@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
       next: (user) => { //If the connection is successful, the response contains the user
         this.message = "Bienvenu sur la plateforme";
         localStorage.setItem('authToken', user.token); // Save token in browser
+        localStorage.setItem('authFirstname', user.firstName); // Save the first name in browser
         this._router.navigate(['/dashboard']);
         this.dialogRef.close();
       }
