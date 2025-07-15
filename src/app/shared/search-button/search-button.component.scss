@@ -1,0 +1,33 @@
+@use '@angular/material' as mat;
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  --mat-icon-color: #6d7c5f;
+}
+
+mat-form-field {
+  width: 100%;
+  padding: 10px;
+  max-width: 400px;
+  overflow: hidden;
+}
+
+mat-icon {
+  font-size: 30px;
+}
+
+.custom-search-field {
+  @include mat.form-field-overrides((
+    outlined-outline-color: #6D7C5F,
+    outlined-focus-outline-color: #6D7C5F,
+    outlined-caret-color: #6D7C5F,
+    outlined-hover-outline-color: #6D7C5F,
+    outlined-label-text-color: #6D7C5F,
+    outlined-focus-label-text-color: #6D7C5F,
+    outlined-hover-label-text-color: #4E9442,
+    outlined-input-text-placeholder-color:#4E9442,
+  ));
+}

@@ -7,16 +7,22 @@
   <span class="spacer"></span>
 
   <!-- First button materials  -->
-  <button mat-fab extended class="btn-rentServeBasket">
-    <mat-icon>construction</mat-icon>
-    Matériels
-  </button>
+  <!-- Display the button when the user is connected -->
+  @if (isAuthenticated()) {
+    <button mat-fab extended class="btn-rentServeBasket">
+      <mat-icon>construction</mat-icon>
+      Matériels
+    </button>
+  }
 
   <!-- Second button serves -->
-  <button mat-fab extended class="btn-rentServeBasket">
-    Services
-    <mat-icon>volunteer_activism</mat-icon>
-  </button>
+  <!-- Display the button when the user is connected -->
+  @if (isAuthenticated()) {
+    <button mat-fab extended class="btn-rentServeBasket">
+      Services
+      <mat-icon>volunteer_activism</mat-icon>
+    </button>
+  }
 
   <!-- Space between buttons -->
   <span class="spacer"></span>
@@ -28,9 +34,21 @@
   </button>
 
   <!-- The right button for connect -->
-  <button mat-fab extended (click)="openLoginModal()" class="btn-login">
-    <span>Connexion</span>
-    <mat-icon>account_circle</mat-icon>
-  </button>
+  @if (isAuthenticated()) {
+    <button type="button" [matMenuTriggerFor]="settingsMenu">
+      <mat-icon>account_circle</mat-icon>
+      {{ firstname }}
+    </button>
+
+    <mat-menu #settingsMenu>
+      <menu mat-menu-item>Modifier profile</menu>
+      <menu mat-menu-item (click)="logout()">Déconnecter</menu>
+    </mat-menu>
+  } @else {
+    <button mat-fab extended (click)="openLoginModal()" class="btn-login">
+      <span>Connexion</span>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  }
 
 </mat-toolbar>
