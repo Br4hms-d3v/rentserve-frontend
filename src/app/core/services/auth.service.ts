@@ -63,6 +63,7 @@ export class AuthService {
    */
   logout() {
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('authToken');
     this._currentUser.next(null);
   }
 

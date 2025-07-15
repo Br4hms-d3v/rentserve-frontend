@@ -55,6 +55,8 @@ export class NavComponent implements OnInit {
   // Log out with redirection to home
   logout() {
     this.authService.logout();
+    localStorage.removeItem('authFirstname');
+    localStorage.removeItem('aut');
     this._router.navigate(['']).then(r => false);
   }
 
