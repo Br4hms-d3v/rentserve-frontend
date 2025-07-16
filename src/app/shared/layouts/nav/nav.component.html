@@ -35,13 +35,13 @@
 
   <!-- The right button for connect -->
   @if (isAuthenticated()) {
-    <button type="button" [matMenuTriggerFor]="settingsMenu">
+    <button mat-fab extended [matMenuTriggerFor]="settingsMenu" class="btn-login">
       <mat-icon>account_circle</mat-icon>
       {{ firstname }}
     </button>
 
     <mat-menu #settingsMenu>
-      <menu mat-menu-item>Modifier profile</menu>
+      <menu mat-menu-item [routerLink]="'user/edit-profile'" >Modifier profile</menu>
       <menu mat-menu-item (click)="logout()">Déconnecter</menu>
     </mat-menu>
   } @else {
