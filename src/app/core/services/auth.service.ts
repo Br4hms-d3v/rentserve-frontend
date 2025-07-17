@@ -12,7 +12,7 @@ import {RegistrationModel} from '../../features/auth/model/registration';
 export class AuthService {
 
   private apiUrl = environment.apiBaseUrl + environment.authEndPoint; // API base URL + endpoint for auth (login)
-  private _currentUser !: BehaviorSubject<UserModel | null>; // Save the current user (as an observable)
+  _currentUser !: BehaviorSubject<UserModel | null>; // Save the current user (as an observable)
 
   constructor(private readonly _http: HttpClient) {
     let potentialUser = localStorage.getItem('currentUser'); // Try to read user from localStorage
@@ -20,8 +20,18 @@ export class AuthService {
   }
 
   // Get the current user value (not observable)
-  get currentUser(): UserModel | null {
-    return this._currentUser.value;
+  get currentUser$(): Observable<UserModel | null> {
+    return this._currentUser.asObservable();
+  }
+
+  updateUserFirstname(firstName: string) {
+    if(this._currentUser.value) {
+      this._currentUser.value.firstName = firstName;
+
+      localStorage.setItem('currentUser', JSON.stringify(this._currentUser.value));
+
+      this._currentUser.next(this._currentUser.value);
+    }
   }
 
   /**
@@ -40,7 +50,7 @@ export class AuthService {
         // Save user in memory
         this._currentUser.next(data);
         // Save user in localStorage
-        localStorage.setItem('currentUser', JSON.stringify(data.token));
+        localStorage.setItem('currentUser', JSON.stringify(data));
       }
     ));
   }
@@ -53,7 +63,7 @@ export class AuthService {
     }).pipe(tap(
       (data) => {
         this._currentUser.next(data);
-        localStorage.setItem('currentUser', JSON.stringify(data.token));
+        localStorage.setItem('currentUser', JSON.stringify(data));
       }
     ))
   }
@@ -63,11 +73,7 @@ export class AuthService {
    */
   logout() {
     localStorage.removeItem('currentUser');
-    localStorage.removeItem('authToken');
     this._currentUser.next(null);
   }
 
-  isAuthenticated() {
-    return !!this.currentUser;
-  }
 }

@@ -8,7 +8,7 @@
 
   <!-- First button materials  -->
   <!-- Display the button when the user is connected -->
-  @if (isAuthenticated()) {
+  @if (isAuthenticated) {
     <button mat-fab extended class="btn-rentServeBasket">
       <mat-icon>construction</mat-icon>
       Matériels
@@ -17,7 +17,7 @@
 
   <!-- Second button serves -->
   <!-- Display the button when the user is connected -->
-  @if (isAuthenticated()) {
+  @if (isAuthenticated) {
     <button mat-fab extended class="btn-rentServeBasket">
       Services
       <mat-icon>volunteer_activism</mat-icon>
@@ -34,14 +34,14 @@
   </button>
 
   <!-- The right button for connect -->
-  @if (isAuthenticated()) {
+  @if (isAuthenticated) {
     <button mat-fab extended [matMenuTriggerFor]="settingsMenu" class="btn-login">
       <mat-icon>account_circle</mat-icon>
       {{ firstname }}
     </button>
 
     <mat-menu #settingsMenu>
-      <menu mat-menu-item [routerLink]="'user/edit-profile'" >Modifier profile</menu>
+      <menu mat-menu-item [routerLink]="'user/edit-profile'">Modifier profile</menu>
       <menu mat-menu-item (click)="logout()">Déconnecter</menu>
     </mat-menu>
   } @else {

@@ -9,7 +9,6 @@ import {NgClass} from '@angular/common';
 import {AuthService} from '../../../core/services/auth.service';
 import {MatMenuModule} from '@angular/material/menu';
 import {Router, RouterLink} from '@angular/router';
-import {user_routes} from '../../../features/user/user.routes';
 
 
 @Component({
@@ -24,6 +23,7 @@ export class NavComponent implements OnInit {
 
   isDarkMode = false;
   firstname: string | null | undefined;
+  isAuthenticated: boolean = false;
 
   constructor(
     private themeService: ThemeService,
@@ -36,7 +36,13 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.isDarkMode = this.themeService.isDarkMode();
     this.themeService.darkMode$.subscribe(mode => this.isDarkMode = mode);
-    this.firstname = localStorage.getItem('authFirstname');
+    this.authService.currentUser$.subscribe(user => {
+      if (user) {
+        this.isAuthenticated = !!user;
+        this.firstname = user.firstName;
+      }
+    })
+
   }
 
   // Open modal for login
@@ -48,18 +54,13 @@ export class NavComponent implements OnInit {
     });
   }
 
-  // Authenticated user for display something
-  isAuthenticated() {
-    return this.authService.isAuthenticated();
-  }
-
   // Log out with redirection to home
   logout() {
     this.authService.logout();
-    localStorage.removeItem('authFirstname');
-    localStorage.removeItem('aut');
+    this.authService._currentUser.next(null);
+    this.isAuthenticated = false;
     this._router.navigate(['']).then(r => false);
   }
 
-  protected readonly user_routes = user_routes;
+
 }
