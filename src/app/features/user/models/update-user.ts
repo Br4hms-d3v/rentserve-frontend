@@ -1,5 +1,4 @@
 export interface UpdateUserForm {
-  id:number;
   name: string;
   firstName: string;
   birthdate: Date;

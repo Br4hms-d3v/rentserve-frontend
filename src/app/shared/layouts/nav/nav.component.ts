@@ -24,6 +24,7 @@ export class NavComponent implements OnInit {
   isDarkMode = false;
   firstname: string | null | undefined;
   isAuthenticated: boolean = false;
+  userId : number | undefined;
 
   constructor(
     private themeService: ThemeService,
@@ -40,11 +41,11 @@ export class NavComponent implements OnInit {
       if (user) {
         this.isAuthenticated = !!user;
         this.firstname = user.firstName;
+        this.userId = user.id;
       }
     })
 
   }
-
   // Open modal for login
   openLoginModal() {
     this.dialog.open(LoginComponent, {

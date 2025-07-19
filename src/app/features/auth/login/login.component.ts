@@ -70,7 +70,6 @@ export class LoginComponent implements OnInit {
     this._authServ.login(this.loginForm.value).subscribe({
       next: (user) => { //If the connection is successful, the response contains the user
         this.message = "Bienvenu sur la plateforme";
-        console.log(user);
         this._router.navigate(['/dashboard']).then();
         this.dialogRef.close();
       }

@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserDto} from '../models/userDto';
 import {UpdateUserForm} from '../models/update-user';
 import {AuthService} from '../../../core/services/auth.service';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-edit-user',
@@ -25,6 +26,7 @@ import {AuthService} from '../../../core/services/auth.service';
     MatButton,
     ChangePasswordComponent,
     DeleteUserComponent,
+    MatTabsModule
   ],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss'
@@ -60,7 +62,7 @@ export class EditUserComponent implements OnInit {
   ngOnInit() {
 
     this.userId = Number(this._route.snapshot.paramMap.get('id'));
-    console.log(this.userId);
+    // console.log(this.userId);
 
     this.userService.getUser(this.userId).subscribe({
       next: (data) => {
@@ -87,7 +89,6 @@ export class EditUserComponent implements OnInit {
     }
 
     let editUser: UpdateUserForm = {
-      id: this.userDto.id,
       name: this.editUserForm.get('name')?.value,
       firstName: this.editUserForm.get('firstName')?.value,
       birthdate: this.editUserForm.get('birthdate')?.value,

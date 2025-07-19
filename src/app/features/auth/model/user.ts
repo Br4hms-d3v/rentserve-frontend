@@ -1,6 +1,7 @@
 import {RoleEnum} from '../enum/role';
 
 export interface UserModel {
+  id: number;
   name: string;
   firstName: string;
   birthdate: Date;

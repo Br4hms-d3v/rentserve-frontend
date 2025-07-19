@@ -19,15 +19,15 @@ export class UserService {
   }
 
   getUser(id: number) {
-    return this._http.get<UserDto>(this.apiUrl + '/' +id);
+    return this._http.get<UserDto>(this.apiUrl + '/' + id);
   }
 
   editUser(id: number | null | undefined, form: UpdateUserForm) {
-    return this._http.put<UpdateUserForm>(this.apiUrl +'/' + id + "/edit", form);
+    return this._http.put<UpdateUserForm>(this.apiUrl + '/' + id + "/edit", form);
   }
 
-  changePassword(id: string | number, form: ChangePasswordForm) {
-    return this._http.patch<ChangePasswordForm>(this.apiUrl + id + "/change-password", form);
+  changePassword(id: number | undefined, form: ChangePasswordForm) {
+    return this._http.patch<ChangePasswordForm>(this.apiUrl + '/' + id + "/change-password", form);
   }
 
   deleteUser(id: string | number) {

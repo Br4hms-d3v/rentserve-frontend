@@ -41,7 +41,7 @@
     </button>
 
     <mat-menu #settingsMenu>
-      <menu mat-menu-item [routerLink]="'user/edit-profile'">Modifier profile</menu>
+      <menu mat-menu-item [routerLink]="'user/'+userId+'/edit-profile'">Modifier profile</menu>
       <menu mat-menu-item (click)="logout()">Déconnecter</menu>
     </mat-menu>
   } @else {
