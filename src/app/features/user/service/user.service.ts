@@ -31,7 +31,7 @@ export class UserService {
   }
 
   deleteUser(id: string | number) {
-    return this._http.delete(this.apiUrl + id + "/delete");
+    return this._http.delete(this.apiUrl + '/' + id + "/delete");
   }
 
 }

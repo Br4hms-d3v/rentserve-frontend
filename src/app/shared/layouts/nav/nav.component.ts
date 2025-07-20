@@ -24,7 +24,7 @@ export class NavComponent implements OnInit {
   isDarkMode = false;
   firstname: string | null | undefined;
   isAuthenticated: boolean = false;
-  userId : number | undefined;
+  userId: number | undefined;
 
   constructor(
     private themeService: ThemeService,
@@ -42,10 +42,15 @@ export class NavComponent implements OnInit {
         this.isAuthenticated = !!user;
         this.firstname = user.firstName;
         this.userId = user.id;
+      } else {
+        this.isAuthenticated = false;
+        this.firstname = null;
+        this.userId = undefined;
       }
     })
 
   }
+
   // Open modal for login
   openLoginModal() {
     this.dialog.open(LoginComponent, {
@@ -58,10 +63,10 @@ export class NavComponent implements OnInit {
   // Log out with redirection to home
   logout() {
     this.authService.logout();
-    this.authService._currentUser.next(null);
+    this.firstname = null;
+    this.userId = undefined;
     this.isAuthenticated = false;
     this._router.navigate(['']).then(r => false);
   }
-
 
 }

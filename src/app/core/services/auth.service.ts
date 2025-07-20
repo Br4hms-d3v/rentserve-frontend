@@ -24,8 +24,12 @@ export class AuthService {
     return this._currentUser.asObservable();
   }
 
+  getCurrentUserId(): number | null {
+    return this._currentUser.getValue()?.id ?? null;
+  }
+
   updateUserFirstname(firstName: string) {
-    if(this._currentUser.value) {
+    if (this._currentUser.value) {
       this._currentUser.value.firstName = firstName;
 
       localStorage.setItem('currentUser', JSON.stringify(this._currentUser.value));

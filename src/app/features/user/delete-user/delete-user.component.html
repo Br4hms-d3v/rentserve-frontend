@@ -1,8 +1,20 @@
-<div>
-  <div class="delete-label">Supprimer le compte</div>
+<h2>Supprimer </h2>
+
+@if (message) {
+  <div class="msgError">
+    {{ message }}
+  </div>
+} @else if (messageSuccess) {
+  <div class="msgSuccess">
+    {{ messageSuccess }}
+  </div>
+}
+
+<div class="tableauUserUpdate">
+  <div class="delete-label">Supprimer définitivement: </div>
   <div class="delete-button-row">
     <div class="delete-button-container">
-      <button mat-fab extended>
+      <button mat-fab extended (click)="onDeleteAccount()">
         <mat-icon>delete</mat-icon>
         Supprimer
       </button>
