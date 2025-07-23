@@ -1,0 +1,114 @@
+<mat-tab-group>
+
+  <mat-tab label="Mise à jour du profil">
+    <h2>Editer profile</h2>
+
+    @if (message) {
+      <div class="msgError">
+        {{ message }}
+      </div>
+    } @else if (messageSuccess) {
+      <div class="msgSuccess">
+        {{ messageSuccess }}
+      </div>
+    }
+
+    <div class="tableauUserUpdate">
+      <form [formGroup]="editUserForm" (ngSubmit)="onSubmitEditProfile()">
+
+        <table class="tabUpdateUser">
+          <tr>
+            <td>
+              <mat-form-field appearance="outline" class="inputMatField">
+                <mat-label>Nom</mat-label>
+                <input matInput placeholder="Entrez votre nom" formControlName="name">
+                <mat-error>Le nom est obligatoire</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="outline" class="inputMatField">
+                <mat-label>Prénom</mat-label>
+                <input matInput placeholder="Entrez votre prénom" formControlName="firstName">
+                <mat-error>Le prénom est obligatoire</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2">
+              <mat-form-field appearance="outline" class="inputMatField">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="adresse@email.com" formControlName="email">
+                <mat-error>L'adresse email est requise.</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <mat-form-field appearance="outline" class="inputMatField">
+                <mat-label>Date de naissance</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="birthdate">
+                <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error>Date de naissance est obligatoire</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="outline" class="inputMatField">
+                <mat-label>Pseudo</mat-label>
+                <input matInput placeholder="Entrez votre pseudo" formControlName="pseudo">
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td colspan="2">
+              <mat-form-field appearance="outline" class="inputMatField">
+                <mat-label>Rue</mat-label>
+                <input matInput placeholder="numéro + adresse" formControlName="street">
+                <mat-error>L'adresse est important</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <mat-form-field appearance="outline" class="inputMatField">
+                <mat-label>ville</mat-label>
+                <input matInput placeholder="Nom de la ville" formControlName="city">
+                <mat-error>Le nom de la ville est important</mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="outline" class="inputMatField">
+                <mat-label>Code postal</mat-label>
+                <input matInput placeholder="Entrez le code postal" formControlName="zipCode">
+                <mat-error>Le code postal est important</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <div class="btn-update">
+          <button type="submit" mat-stroked-button>Modifier</button>
+        </div>
+
+      </form>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Changer le mot de passe">
+    <!-- Call the component change only password -->
+    <div class="tableauUserUpdate">
+      <app-change-password/>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Supprimer le compte">
+    <!-- Call the component delete an account -->
+    <div class="tableauUserUpdate">
+      <app-delete-user/>
+    </div>
+  </mat-tab>
+</mat-tab-group>

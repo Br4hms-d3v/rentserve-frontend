@@ -3,7 +3,7 @@ import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
 import {provideNativeDateAdapter} from '@angular/material/core';
-import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {GlobalErrorHandler} from './core/error-handler/global-error-handler.service';
 
 export const appConfig: ApplicationConfig = {
@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     {
       provide: ErrorHandler,
-      useClass: GlobalErrorHandler
-    }
+      useClass: GlobalErrorHandler,
+    },
   ]
 };

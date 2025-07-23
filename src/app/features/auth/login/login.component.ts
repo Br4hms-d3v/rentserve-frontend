@@ -1,4 +1,4 @@
-import {Component, inject, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogClose,
@@ -70,9 +70,7 @@ export class LoginComponent implements OnInit {
     this._authServ.login(this.loginForm.value).subscribe({
       next: (user) => { //If the connection is successful, the response contains the user
         this.message = "Bienvenu sur la plateforme";
-        localStorage.setItem('authToken', user.token); // Save token in browser
-        localStorage.setItem('authFirstname', user.firstName); // Save the first name in browser
-        this._router.navigate(['/dashboard']);
+        this._router.navigate(['/dashboard']).then();
         this.dialogRef.close();
       }
       ,

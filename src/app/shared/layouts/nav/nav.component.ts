@@ -8,12 +8,12 @@ import {LoginComponent} from '../../../features/auth/login/login.component';
 import {NgClass} from '@angular/common';
 import {AuthService} from '../../../core/services/auth.service';
 import {MatMenuModule} from '@angular/material/menu';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 
 @Component({
   selector: 'app-nav',
-  imports: [MatToolbar, MatIcon, MatFabButton, NgClass, MatButtonModule, MatMenuModule],
+  imports: [MatToolbar, MatIcon, MatFabButton, NgClass, MatButtonModule, MatMenuModule, RouterLink],
   templateUrl: './nav.component.html',
   styleUrl:
     './nav.component.scss'
@@ -22,7 +22,9 @@ import {Router} from '@angular/router';
 export class NavComponent implements OnInit {
 
   isDarkMode = false;
-  firstname: string | undefined;
+  firstname: string | null | undefined;
+  isAuthenticated: boolean = false;
+  userId: number | undefined;
 
   constructor(
     private themeService: ThemeService,
@@ -35,7 +37,18 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.isDarkMode = this.themeService.isDarkMode();
     this.themeService.darkMode$.subscribe(mode => this.isDarkMode = mode);
-    this.firstname = localStorage.getItem('authFirstname') || undefined;
+    this.authService.currentUser$.subscribe(user => {
+      if (user) {
+        this.isAuthenticated = !!user;
+        this.firstname = user.firstName;
+        this.userId = user.id;
+      } else {
+        this.isAuthenticated = false;
+        this.firstname = null;
+        this.userId = undefined;
+      }
+    })
+
   }
 
   // Open modal for login
@@ -47,16 +60,12 @@ export class NavComponent implements OnInit {
     });
   }
 
-  // Authenticated user for display something
-  isAuthenticated() {
-    return this.authService.isAuthenticated();
-  }
-
   // Log out with redirection to home
   logout() {
     this.authService.logout();
-    localStorage.removeItem('authFirstname');
-    localStorage.removeItem('aut');
+    this.firstname = null;
+    this.userId = undefined;
+    this.isAuthenticated = false;
     this._router.navigate(['']).then(r => false);
   }
 
