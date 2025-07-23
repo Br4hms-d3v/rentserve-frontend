@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environment/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {UpdateUserForm} from '../models/update-user';
-import {ChangePasswordForm} from '../models/change-password';
 import {UserDto} from '../models/userDto';
+import {ChangePasswordForm} from '../models/change-password';
 
 
 @Injectable({
@@ -19,12 +19,38 @@ export class UserService {
   }
 
   getUser(id: number) {
-    return this._http.get<UserDto>(this.apiUrl + '/' + id);
+
+    const userJson = localStorage.getItem('currentUser');
+    let token = '';
+
+    if (userJson) {
+      const user = JSON.parse(userJson);
+      token = user.token;
+    }
+
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+    return this._http.get<UserDto>(this.apiUrl + '/' + id, {headers});
   }
 
   editUser(id: number | null | undefined, form: UpdateUserForm) {
-    return this._http.put<UpdateUserForm>(this.apiUrl + '/' + id + "/edit", form);
+    const userJson = localStorage.getItem('currentUser');
+    let token = '';
+
+    if (userJson) {
+      const user = JSON.parse(userJson);
+      token = user.token;
+    }
+
+    const headers = new HttpHeaders({
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+    return this._http.put<UpdateUserForm>(this.apiUrl + '/' + id + "/edit", form, {headers});
   }
+
 
   changePassword(id: number | undefined, form: ChangePasswordForm) {
     return this._http.patch<ChangePasswordForm>(this.apiUrl + '/' + id + "/change-password", form);

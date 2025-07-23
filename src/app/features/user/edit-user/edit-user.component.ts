@@ -75,7 +75,10 @@ export class EditUserComponent implements OnInit {
         this.editUserForm.get('street')?.patchValue(this.userDto.street);
         this.editUserForm.get('city')?.patchValue(this.userDto.city);
         this.editUserForm.get('zipCode')?.patchValue(this.userDto.zipCode);
-        }
+        },
+      error: (err) => {
+        console.log('Erreur de recup', err);
+      }
     })
 
   }

@@ -28,6 +28,15 @@ export class AuthService {
     return this._currentUser.getValue()?.id ?? null;
   }
 
+  getToken(): string | null {
+    const currentUser = this._currentUser.getValue();
+    if(currentUser) {
+      console.log('Token dans AuthService', currentUser.token);
+      return currentUser.token;
+    }
+    return null;
+  }
+
   updateUserFirstname(firstName: string) {
     if (this._currentUser.value) {
       this._currentUser.value.firstName = firstName;
@@ -55,6 +64,7 @@ export class AuthService {
         this._currentUser.next(data);
         // Save user in localStorage
         localStorage.setItem('currentUser', JSON.stringify(data));
+        localStorage.setItem('token', data.token);
       }
     ));
   }
