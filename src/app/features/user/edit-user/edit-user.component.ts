@@ -61,10 +61,24 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit() {
 
-    this.userId = Number(this._route.snapshot.paramMap.get('id'));
+    this._route.paramMap.subscribe(params => {
+      this.userId = Number(params.get('id'));
+    })
     // console.log(this.userId);
+    const currentUserString = localStorage.getItem('currentUser');
+    const currentUser = currentUserString ? JSON.parse(currentUserString) : null;
 
-    this.userService.getUser(this.userId).subscribe({
+    if (!currentUser || currentUser.id !== this.userId) {
+      this.message = "Vous ne devez plus refaire ceci !";
+      this._router.navigate(['/user/' + currentUser.id + '/edit-profile']);
+
+      this.loadUserData();
+      return;
+
+    }
+
+
+    this.userService.getUser(currentUser.id).subscribe({
       next: (data) => {
         this.userDto = data
         this.editUserForm.get('name')?.patchValue(this.userDto.name);
@@ -75,12 +89,11 @@ export class EditUserComponent implements OnInit {
         this.editUserForm.get('street')?.patchValue(this.userDto.street);
         this.editUserForm.get('city')?.patchValue(this.userDto.city);
         this.editUserForm.get('zipCode')?.patchValue(this.userDto.zipCode);
-        },
+      },
       error: (err) => {
         console.log('Erreur de recup', err);
       }
     })
-
   }
 
   onSubmitEditProfile() {
@@ -122,4 +135,33 @@ export class EditUserComponent implements OnInit {
 
   }
 
+  loadUserData() {
+    const currentUserString = localStorage.getItem('currentUser');
+    const currentUser = currentUserString ? JSON.parse(currentUserString) : null;
+
+    if (currentUser && currentUser.id) {
+      this.userService.getUser(currentUser.id).subscribe({
+        next: (data) => {
+          this.userDto = data;
+
+          // Remplir le formulaire avec les données reçues
+          this.editUserForm.patchValue({
+            name: data.name,
+            firstName: data.firstName,
+            email: data.email,
+            birthdate: data.birthdate,
+            pseudo: data.pseudo,
+            street: data.street,
+            city: data.city,
+            zipCode: data.zipCode,
+          });
+        },
+        error: (err) => {
+          console.error('Erreur lors du chargement des données utilisateur', err);
+        }
+      });
+    } else {
+      console.warn('Utilisateur non connecté ou données manquantes');
+    }
+  }
 }

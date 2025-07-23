@@ -13,51 +13,45 @@ export class UserService {
 
   private apiUrl = environment.apiBaseUrl + environment.userEndPoint;
 
+  private getAuthHeaders(): HttpHeaders {
+    const userJson = localStorage.getItem('currentUser');
+    let token = '';
+
+    if (userJson) {
+      const user = JSON.parse(userJson);
+      token = user.token;
+    }
+
+    return new HttpHeaders({
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
   constructor(
     private readonly _http: HttpClient
   ) {
   }
 
   getUser(id: number) {
-
-    const userJson = localStorage.getItem('currentUser');
-    let token = '';
-
-    if (userJson) {
-      const user = JSON.parse(userJson);
-      token = user.token;
-    }
-
-    const headers = new HttpHeaders({
-      'Accept': 'application/json',
-      'Authorization': `Bearer ${token}`
-    })
+    const headers = this.getAuthHeaders();
     return this._http.get<UserDto>(this.apiUrl + '/' + id, {headers});
   }
 
   editUser(id: number | null | undefined, form: UpdateUserForm) {
-    const userJson = localStorage.getItem('currentUser');
-    let token = '';
-
-    if (userJson) {
-      const user = JSON.parse(userJson);
-      token = user.token;
-    }
-
-    const headers = new HttpHeaders({
-      'Accept': 'application/json',
-      'Authorization': `Bearer ${token}`
-    })
+    const headers = this.getAuthHeaders();
     return this._http.put<UpdateUserForm>(this.apiUrl + '/' + id + "/edit", form, {headers});
   }
 
 
   changePassword(id: number | undefined, form: ChangePasswordForm) {
-    return this._http.patch<ChangePasswordForm>(this.apiUrl + '/' + id + "/change-password", form);
+    const headers = this.getAuthHeaders();
+    return this._http.patch<ChangePasswordForm>(this.apiUrl + '/' + id + "/change-password", form, {headers});
   }
 
   deleteUser(id: string | number) {
-    return this._http.delete(this.apiUrl + '/' + id + "/delete");
+    const headers = this.getAuthHeaders();
+    return this._http.delete(this.apiUrl + '/' + id + "/delete", {headers});
   }
 
 }
