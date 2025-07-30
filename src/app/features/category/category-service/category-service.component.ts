@@ -1,27 +1,10 @@
-import {Component} from '@angular/core';
-import {  MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import {MatPaginator} from '@angular/material/paginator';
+import {CategoryService} from '../service/category.service';
+import {CategoryDto} from '../model/category';
 
 @Component({
   selector: 'app-category-service',
@@ -29,18 +12,44 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
+    MatPaginator,
   ],
   templateUrl: './category-service.component.html',
   styleUrl: './category-service.component.scss'
 })
-export class CategoryServiceComponent {
 
-  displayedColumns: string[] = ['position', 'name'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+export class CategoryServiceComponent implements OnInit {
+
+  message: string = 'Nous ne trouvons pas la catégorie';
+  displayedColumns: string[] = ['position', 'nameOfCategoryServ'];
+  // @ts-ignore
+  dataSourceService: MatTableDataSource<{ position: number, nameOfCategoryServ: string }> = new MatTableDataSource([]);
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+
+  constructor(private readonly _categoryService: CategoryService) {
+  }
+
+  ngOnInit(): void {
+    this._categoryService.getCategoriesService().subscribe({
+      next: (categoriesServ: CategoryDto[]) => {
+        // Map
+        this.dataSourceService.data = categoriesServ.map((categoryServ, index) => ({
+          position: index + 1,  // Position commence à 1
+          nameOfCategoryServ: categoryServ.nameCategory   // Nom de la catégorie
+        }));
+        // Configurez le paginator et le sort
+        // @ts-ignore
+        this.dataSourceService.paginator = this.paginator;
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération des catégories:', err);
+      }
+    });
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSourceService.filter = filterValue.trim().toLowerCase();
   }
 
 }

@@ -34,4 +34,9 @@ export class CategoryService {
     return this._http.get<CategoryDto[]>(this.apiUrl + '/material', {headers})
   }
 
+  getCategoriesService(): Observable<CategoryDto[]> {
+    const headers = this.getAuthHeader();
+    return this._http.get<CategoryDto[]>(this.apiUrl + '/service', {headers})
+  }
+
 }
