@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     {
       provide: ErrorHandler,
-      useClass: GlobalErrorHandler,
-    },
+      useClass: GlobalErrorHandler
+    }
   ]
 };
