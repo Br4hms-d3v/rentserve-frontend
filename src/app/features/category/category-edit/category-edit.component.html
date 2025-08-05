@@ -1,1 +1,22 @@
-<p>category-edit works!</p>
+<div class="container-category">
+  <h1> Mise à jour de la categorie </h1>
+
+  @if (message) {
+    {{ message }}
+  }
+
+  @if (messageSuccess) {
+    {{ messageSuccess }}
+  }
+  <form [formGroup]="editCategory" class="example-form" (ngSubmit)="onSubmitEditCategory()">
+    <h3> {{ categoryName }} </h3>
+    <mat-form-field class="example-full-width">
+      <mat-label>Categorie</mat-label>
+      <input matInput #messageLenghtMax maxlength="150" formControlName="nameCategory">
+      <mat-hint align="end">{{ messageLenghtMax.value.length }} / 150</mat-hint>
+      <mat-error>Le champ ne doit pas être vide</mat-error>
+    </mat-form-field>
+    <button mat-flat-button type="submit" id="btnSave">Sauvegarder</button>
+    <button mat-flat-button id="btnDelete">Supprimer</button>
+  </form>
+</div>

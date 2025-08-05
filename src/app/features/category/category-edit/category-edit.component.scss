@@ -1,0 +1,24 @@
+@use '@angular/material' as mat;
+
+.container-category {
+  width: 100%;
+  height: 90vh;
+  justify-content: space-between;
+}
+
+h1 {
+text-align: center ;
+}
+
+h3{
+color:red;
+}
+
+
+#btnSave{
+background-color: green;
+}
+
+#btnDelete{
+  background-color: red;
+}
