@@ -6,6 +6,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatDialog} from '@angular/material/dialog';
+import {CategoryDeleteComponent} from '../category-delete/category-delete.component';
 
 @Component({
   selector: 'app-category-edit',
@@ -25,7 +27,7 @@ export class CategoryEditComponent implements OnInit {
     private readonly _categoryService: CategoryService,
     private readonly _fb: FormBuilder,
     private readonly _route: ActivatedRoute,
-    private readonly _router: Router,
+    private readonly _dialog: MatDialog
   ) {
     this.editCategory = this._fb.group({
       nameCategory: ['', Validators.required]
@@ -62,7 +64,7 @@ export class CategoryEditComponent implements OnInit {
         //console.log(this.updateCategory)
       },
       error: (error) => {
-        if (typeof error.error ==='string') {
+        if (typeof error.error === 'string') {
           this.message = error.error.message;
           console.log(this.message)
         } else if (error.error?.message) {
@@ -74,6 +76,15 @@ export class CategoryEditComponent implements OnInit {
         }
       }
     })
+  }
+
+  openDialogDeleteCategory(categoryId: number) {
+    this._dialog.open(CategoryDeleteComponent, {
+      width: '500px',
+      height: '300px',
+      data: {id: categoryId}
+    })
+
   }
 
 

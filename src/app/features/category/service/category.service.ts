@@ -50,4 +50,9 @@ export class CategoryService {
     return this._http.put<CategoryForm>(this.apiUrl + '/' + id + '/edit', form, {headers})
   }
 
+  deleteCategory(id: number) {
+    const headers = this.getAuthHeader();
+    return this._http.delete(this.apiUrl + '/' + id, {headers});
+  }
+
 }

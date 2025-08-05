@@ -7,12 +7,15 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {CategoryDto} from '../model/category';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {AuthService} from '../../../core/services/auth.service';
-import {RouterLink} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
+import {MatButton} from '@angular/material/button';
+import {CategoryDeleteComponent} from '../category-delete/category-delete.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-category-material',
   imports: [
-    MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, RouterLink
+    MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, RouterLink, MatButton
   ],
   templateUrl: './category-material.component.html',
   styleUrl: './category-material.component.scss'
@@ -24,7 +27,11 @@ export class CategoryMaterialComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = [];
   role: string | undefined;
   // @ts-ignore
-  dataSourceMat: MatTableDataSource<{position: number, nameOfCategoryMat: string,idCategory: number }> = new MatTableDataSource<{
+  dataSourceMat: MatTableDataSource<{
+    position: number,
+    nameOfCategoryMat: string,
+    idCategory: number
+  }> = new MatTableDataSource<{
     position: number,
     nameOfCategoryMat: string
     idCategory: number;
@@ -32,7 +39,7 @@ export class CategoryMaterialComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
 
-  constructor(private readonly _categoryService: CategoryService, private readonly _authService: AuthService) {
+  constructor(private readonly _categoryService: CategoryService, private readonly _authService: AuthService, private readonly _route: ActivatedRoute, private readonly _dialog: MatDialog) {
     this._categoryService.getCategoriesMaterial().subscribe({
       next: (categoriesMat: CategoryDto[]) => {
         // Mappage des données
@@ -88,6 +95,15 @@ export class CategoryMaterialComponent implements AfterViewInit, OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceMat.filter = filterValue.trim().toLowerCase();
+  }
+
+  openDialogDeleteCategory(id: number) {
+    this._dialog.open(CategoryDeleteComponent, {
+      width: '500px',
+      height: '300px',
+      data: {id: id}
+    })
+
   }
 
 }

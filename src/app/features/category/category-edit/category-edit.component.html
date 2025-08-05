@@ -17,6 +17,6 @@
       <mat-error>Le champ ne doit pas être vide</mat-error>
     </mat-form-field>
     <button mat-flat-button type="submit" id="btnSave">Sauvegarder</button>
-    <button mat-flat-button id="btnDelete">Supprimer</button>
   </form>
+  <button mat-button (click)="openDialogDeleteCategory(categoryId)" id="btnDelete">Supprimer</button>
 </div>

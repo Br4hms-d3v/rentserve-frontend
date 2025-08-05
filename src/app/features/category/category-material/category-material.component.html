@@ -27,7 +27,8 @@
   <ng-container matColumnDef="deleteCategoryMat">
     <th mat-header-cell *matHeaderCellDef> Supprimer</th>
     <td mat-cell *matCellDef="let categoryMaterial">
-      <button>supprimer{{ categoryMaterial.id }}</button>
+<!--      <button>supprimer{{ categoryMaterial.id }}</button>-->
+      <button mat-button (click)="openDialogDeleteCategory(categoryMaterial.idCategory)" id="btnDelete">Supprimer</button>
     </td>
   </ng-container>
 
