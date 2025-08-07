@@ -1,14 +1,17 @@
+@use '@angular/material' as mat;
+
 // Title inside form
-h2 {
+h1[mat-dialog-title] {
   text-align: center;
 }
 
 // Modal size and position
 mat-dialog-content {
+  height: 350px;
+  width: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
 }
 
 /**
@@ -29,6 +32,99 @@ mat-dialog-content {
 
 // Message Error
 .msgError {
+  background-color: #f0f0f0;
   color: red;
   font-size: 15px;
+}
+
+/**
+* Style for light mode
+ */
+.light-mode {
+
+  // Title inside form
+  h1[mat-dialog-title] {
+    background-color: #f0f0f0;
+    color: #545E4C;
+  }
+
+  // Modal size and position
+  mat-dialog-content {
+    background-color: #f0f0f0;
+  }
+
+  // Color for form login
+  .input-login {
+    @include mat.form-field-overrides((
+      outlined-outline-color: #6D7C5F,
+      outlined-focus-outline-color: #6D7C5F,
+      outlined-caret-color: #6D7C5F,
+      outlined-hover-outline-color: #6D7C5F,
+      outlined-label-text-color: #6D7C5F,
+      outlined-focus-label-text-color: #6D7C5F,
+      outlined-hover-label-text-color: #4E9442,
+      outlined-input-text-placeholder-color:#4E9442,
+    ));
+  }
+
+  // button back
+  #btnBack {
+    width: 120px;
+    color: white;
+    background-color: #387190 !important;
+  }
+
+  // button log in
+  #btnLogIn {
+    width: 120px;
+    color: white;
+    background-color: #4E9442 !important;
+  }
+
+}
+
+/**
+ * Style for dark mode
+ **/
+.dark-mode {
+
+  // Title inside form
+  h1[mat-dialog-title] {
+    background-color: #2b2b2b;
+    color: #cbd1c1;
+  }
+
+  // Modal size and position
+  mat-dialog-content {
+    background-color: #2b2b2b;
+  }
+
+  // Color for form log in
+  .input-login {
+    @include mat.form-field-overrides((
+      outlined-outline-color: #CBD1C1,
+      outlined-focus-outline-color: #CBD1C1,
+      outlined-caret-color: #CBD1C1,
+      outlined-hover-outline-color: #CBD1C1,
+      outlined-label-text-color: #CBD1C1,
+      outlined-focus-label-text-color: #CBD1C1,
+      outlined-hover-label-text-color: #BAF2B5,
+      outlined-input-text-placeholder-color:#BAF2B5,
+      outlined-input-text-color: #CCD5B9,
+    ));
+  }
+
+  // button back
+  #btnBack {
+    width: 120px;
+    color: white;
+    background-color: #19435a !important;
+  }
+
+  // button log in
+  #btnLogIn {
+    width: 120px;
+    color: #2b2b2b;
+    background-color: #BaF2B5 !important;
+  }
 }

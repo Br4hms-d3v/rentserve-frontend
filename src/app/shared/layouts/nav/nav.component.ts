@@ -54,8 +54,8 @@ export class NavComponent implements OnInit {
   // Open modal for login
   openLoginModal() {
     this.dialog.open(LoginComponent, {
-      width: '400px',
-      height: '400px',
+      // width: '400px',
+      // height: '400px',
       data: {}
     });
   }

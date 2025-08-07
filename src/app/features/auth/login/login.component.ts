@@ -12,12 +12,12 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {AuthService} from '../../../core/services/auth.service';
 import {Router} from '@angular/router';
 import {MatIcon} from '@angular/material/icon';
-
+import {NgClass} from '@angular/common';
+import {ThemeService} from '../../../core/services/theme.service';
 
 @Component({
   selector: 'app-login',
   imports: [
-
     MatButton,
     MatFormField,
     MatInput,
@@ -28,18 +28,21 @@ import {MatIcon} from '@angular/material/icon';
     MatDialogClose,
     MatDialogTitle,
     MatIcon,
-    MatIconButton
+    MatIconButton,
+    NgClass
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
 
+  isDarkMode = false; // Store dark mode state (true or false)
   loginForm!: FormGroup; // LoginForm
   message = ''; // Message to show success or error
   hidePassword = true;
 
   constructor(
+    private readonly _themeService: ThemeService,
     @Inject(MAT_DIALOG_DATA) public data: any, // Catch data's dialogue from nav
     @Inject(MatDialogRef) private dialogRef: MatDialogRef<LoginComponent>, // Catch data's dialogue from nav
     private readonly fb: FormBuilder, // Create a Form
@@ -49,6 +52,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isDarkMode = this._themeService.isDarkMode(); // Get current theme (dark or light)
+    this._themeService.darkMode$.subscribe((mode: boolean) => this.isDarkMode = mode); // Watch changes in dark mode (reactive)
+
     // Create the form with 2 fields: pseudo and password
     this.loginForm = this.fb.group({
       pseudo: [null, [Validators.required]],
@@ -66,7 +72,7 @@ export class LoginComponent implements OnInit {
       return
     }
 
-    // Try to login using the auth service
+    // Try to log in using the auth service
     this._authServ.login(this.loginForm.value).subscribe({
       next: (user) => { //If the connection is successful, the response contains the user
         this.message = "Bienvenu sur la plateforme";

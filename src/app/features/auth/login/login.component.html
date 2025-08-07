@@ -1,39 +1,43 @@
-<h2 mat-dialog-title>Connexion</h2>
+<div class="container-login-form" [ngClass]="{'dark-mode': isDarkMode, 'light-mode': !isDarkMode}">
+  <h1 mat-dialog-title>Connexion</h1>
 
-@if (message) {
-  <div class="msgError">
-    {{ message }}
-  </div>
-}
+  @if (message) {
+    <div class="msgError">
+      {{ message }}
+    </div>
+  }
 
-<mat-dialog-content>
-  <form [formGroup]="loginForm" (ngSubmit)="sign()" class="login-form">
-    @if (loginForm.get('pseudo')!.hasError('required') && loginForm.get('pseudo')?.touched) {
-      <p class="msgError"> Veuillez entrer votre email</p>
-    }
-    <mat-form-field class="input-login">
-      <mat-label>Email ou pseudo</mat-label>
-      <input type="text" matInput id="pseudo" formControlName="pseudo"
-             placeholder="Entrez votre email">
-    </mat-form-field>
+  <mat-dialog-content>
+    <form [formGroup]="loginForm" (ngSubmit)="sign()" class="login-form">
 
-    @if (loginForm.get('password')!.hasError('required') && loginForm.get('password')?.touched) {
-      <p class="msgError"> Entrez un mot de passe valide !</p>
-    }
-    <mat-form-field class="input-login">
-      <mat-label>Mot de passe</mat-label>
-      <input type="password" matInput [type]="hidePassword ? 'password' : 'text'" id="password"
-             formControlName="password" placeholder="Entrez votre mot de passe">
-      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hidePassword">
-        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-      </button>
-    </mat-form-field>
+      <mat-form-field appearance="outline" class="input-login">
+        <mat-label>Email ou pseudo</mat-label>
+        <input type="text" matInput id="pseudo" formControlName="pseudo"
+               placeholder="Entrez votre email">
+        @if (loginForm.get('pseudo')!.hasError('required') && loginForm.get('pseudo')?.touched) {
+          <mat-error> Veuillez entrer votre email</mat-error>
+        }
+      </mat-form-field>
 
-    <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Retour</button>
-      <button mat-button [disabled]="loginForm.invalid">Se connecter</button>
-    </mat-dialog-actions>
 
-  </form>
-</mat-dialog-content>
+      <mat-form-field appearance="outline" class="input-login">
+        <mat-label>Mot de passe</mat-label>
+        <input type="password" matInput [type]="hidePassword ? 'password' : 'text'" id="password"
+               formControlName="password" placeholder="Entrez votre mot de passe">
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hidePassword">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        @if (loginForm.get('password')!.hasError('required') && loginForm.get('password')?.touched) {
+          <mat-error> Entrez un mot de passe valide !</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-dialog-actions align="end">
+        <button id="btnBack" mat-button mat-dialog-close>Retour</button>
+        <button id="btnLogIn" mat-button [disabled]="loginForm.invalid">Se connecter</button>
+      </mat-dialog-actions>
+
+    </form>
+  </mat-dialog-content>
+</div>
