@@ -3,7 +3,7 @@
   <input matInput (keyup)="applyFilter($event)" placeholder="Nom de la catégorie service" #input>
 </mat-form-field>
 
-<table mat-table [dataSource]="dataSourceService" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSourceService" class="mat-elevation-z8" [ngClass]="{'dark-mode-toolbar': isDarkMode, 'light-mode-toolbar': !isDarkMode}">
   <!-- Position Column -->
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef> No.</th>
@@ -19,7 +19,7 @@
   <ng-container matColumnDef="editCategoryServ">
     <th mat-header-cell *matHeaderCellDef> Modifier</th>
     <td mat-cell *matCellDef="let categoryService">
-      <button [routerLink]="['/category/'+categoryService.idCategory+'/edit-category']">modifier</button>
+      <button id="btnEdit"  mat-button [routerLink]="['/category/'+categoryService.idCategory+'/edit-category']">modifier</button>
     </td>
   </ng-container>
 
@@ -27,7 +27,7 @@
     <th mat-header-cell *matHeaderCellDef> Supprimer</th>
     <td mat-cell *matCellDef="let categoryService">
       <!--      <button>supprimer{{ categoryService.id }}</button>-->
-      <button mat-button (click)="openDialogDeleteCategory(categoryService.idCategory)" id="btnDelete">Supprimer</button>
+      <button id="btnDelete" mat-button (click)="openDialogDeleteCategory(categoryService.idCategory)">Supprimer</button>
     </td>
   </ng-container>
 
