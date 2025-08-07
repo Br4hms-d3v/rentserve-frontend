@@ -3,6 +3,7 @@ import {environment} from '../../../environment/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {CategoryDto} from '../model/category';
 import {Observable} from 'rxjs';
+import {CategoryForm} from '../model/categoryForm';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,21 @@ export class CategoryService {
   getCategoriesService(): Observable<CategoryDto[]> {
     const headers = this.getAuthHeader();
     return this._http.get<CategoryDto[]>(this.apiUrl + '/service', {headers})
+  }
+
+  getCategory(id: number | undefined): Observable<CategoryDto> {
+    const headers = this.getAuthHeader();
+    return this._http.get<CategoryDto>(this.apiUrl + '/' + id, {headers})
+  }
+
+  updateCategory(id: number | undefined, form: CategoryForm) {
+    const headers = this.getAuthHeader();
+    return this._http.put<CategoryForm>(this.apiUrl + '/' + id + '/edit', form, {headers})
+  }
+
+  deleteCategory(id: number) {
+    const headers = this.getAuthHeader();
+    return this._http.delete(this.apiUrl + '/' + id, {headers});
   }
 
 }

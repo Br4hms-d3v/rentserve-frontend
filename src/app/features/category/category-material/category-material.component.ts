@@ -6,36 +6,49 @@ import {CategoryService} from '../service/category.service';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {CategoryDto} from '../model/category';
 import {MatSort, MatSortModule} from '@angular/material/sort';
+import {AuthService} from '../../../core/services/auth.service';
+import {ActivatedRoute, RouterLink} from '@angular/router';
+import {MatButton} from '@angular/material/button';
+import {CategoryDeleteComponent} from '../category-delete/category-delete.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-category-material',
   imports: [
-    MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule
+    MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, RouterLink, MatButton
   ],
   templateUrl: './category-material.component.html',
   styleUrl: './category-material.component.scss'
 })
 
-export class CategoryMaterialComponent implements AfterViewInit {
+export class CategoryMaterialComponent implements AfterViewInit, OnInit {
 
   message: string = 'Nous ne trouvons pas la catégorie';
-  displayedColumns: string[] = ['position', 'nameOfCategoryMat'];
+  displayedColumns: string[] = [];
+  role: string | undefined;
   // @ts-ignore
-  dataSourceMat: MatTableDataSource<{ position: number, nameOfCategoryMat: string }> = new MatTableDataSource<{
+  dataSourceMat: MatTableDataSource<{
+    position: number,
+    nameOfCategoryMat: string,
+    idCategory: number
+  }> = new MatTableDataSource<{
     position: number,
     nameOfCategoryMat: string
+    idCategory: number;
   }>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
 
-  constructor(private readonly _categoryService: CategoryService) {
+  constructor(private readonly _categoryService: CategoryService, private readonly _authService: AuthService, private readonly _route: ActivatedRoute, private readonly _dialog: MatDialog) {
     this._categoryService.getCategoriesMaterial().subscribe({
       next: (categoriesMat: CategoryDto[]) => {
         // Mappage des données
         this.dataSourceMat.data = categoriesMat.map((categoryMat, index) => ({
           position: index + 1,  // Position commence à 1
-          nameOfCategoryMat: categoryMat.nameCategory   // Nom de la catégorie
+          nameOfCategoryMat: categoryMat.nameCategory,
+          idCategory: categoryMat.id,// Nom de la catégorie
         }));
+
       },
       error: (error) => {
         if (typeof error.error) {
@@ -49,6 +62,29 @@ export class CategoryMaterialComponent implements AfterViewInit {
     });
   }
 
+  ngOnInit() {
+    this._authService.currentUser$.subscribe(user => {
+      if (user) {
+        this.role = user.role;
+      }
+    });
+    this.setDisplayedColumns();
+  }
+
+  setDisplayedColumns() {
+    this.displayedColumns = ['position', 'nameOfCategoryMat'];
+
+    if (this.role === 'ADMIN' || this.role === 'MODERATOR') {
+      this.displayedColumns.push('editCategoryMat');
+    }
+
+    if (this.role === 'ADMIN') {
+      // ['position', 'nameOfCategoryMat','editCategoryMat', 'deleteCategoryMat'];
+      this.displayedColumns.push('deleteCategoryMat');
+    }
+
+  }
+
   ngAfterViewInit(): void {
     // @ts-ignore
     this.dataSourceMat.paginator = this.paginator;
@@ -59,6 +95,15 @@ export class CategoryMaterialComponent implements AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSourceMat.filter = filterValue.trim().toLowerCase();
+  }
+
+  openDialogDeleteCategory(id: number) {
+    this._dialog.open(CategoryDeleteComponent, {
+      width: '500px',
+      height: '300px',
+      data: {id: id}
+    })
+
   }
 
 }
