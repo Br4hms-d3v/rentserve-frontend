@@ -11,11 +11,13 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {MatButton} from '@angular/material/button';
 import {CategoryDeleteComponent} from '../category-delete/category-delete.component';
 import {MatDialog} from '@angular/material/dialog';
+import {ThemeService} from '../../../core/services/theme.service';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-category-material',
   imports: [
-    MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, RouterLink, MatButton
+    MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, RouterLink, MatButton, NgClass
   ],
   templateUrl: './category-material.component.html',
   styleUrl: './category-material.component.scss'
@@ -23,6 +25,7 @@ import {MatDialog} from '@angular/material/dialog';
 
 export class CategoryMaterialComponent implements AfterViewInit, OnInit {
 
+  isDarkMode = false;
   message: string = 'Nous ne trouvons pas la catégorie';
   displayedColumns: string[] = [];
   role: string | undefined;
@@ -39,7 +42,11 @@ export class CategoryMaterialComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
 
-  constructor(private readonly _categoryService: CategoryService, private readonly _authService: AuthService, private readonly _route: ActivatedRoute, private readonly _dialog: MatDialog) {
+  constructor(
+    private readonly _categoryService: CategoryService,
+    private readonly _authService: AuthService,
+    private readonly _themeService: ThemeService,
+    private readonly _dialog: MatDialog) {
     this._categoryService.getCategoriesMaterial().subscribe({
       next: (categoriesMat: CategoryDto[]) => {
         // Mappage des données
@@ -63,6 +70,9 @@ export class CategoryMaterialComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
+    this.isDarkMode = this._themeService.isDarkMode(); // Get current theme (dark or light)
+    this._themeService.darkMode$.subscribe((mode: boolean) => this.isDarkMode = mode); // Watch changes in dark mode (reactive)
+
     this._authService.currentUser$.subscribe(user => {
       if (user) {
         this.role = user.role;
