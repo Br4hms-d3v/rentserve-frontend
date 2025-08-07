@@ -1,8 +1,11 @@
 <mat-toolbar [ngClass]="{'dark-mode': isDarkMode, 'light-mode': !isDarkMode}">
   <!-- Logo is on left -->
-  <img src="/logo/logo_rentserve.jpg" alt="Logo" class="logo">
-  <span id="logoText">Rent-Serve</span>
-
+  <a routerLink="/dashboard">
+    <img src="/logo/logo_rentserve.jpg" alt="Logo" class="logo">
+  </a>
+  <a routerLink="/dashboard">
+    <span id="logoText">Rent-Serve</span>
+  </a>
   <!-- Space between buttons -->
   <span class="spacer"></span>
 

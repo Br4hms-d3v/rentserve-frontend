@@ -5,9 +5,16 @@ mat-toolbar {
 
 /* Size for logo */
 .logo {
+  padding-top: 7px;
   height: 50px;
   margin-right: 16px;
 }
+
+// Remove the underline from the link
+a {
+ text-decoration: none;
+}
+
 
 /* To make sure the buttons are in the middle. */
 .spacer {
