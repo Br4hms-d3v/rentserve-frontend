@@ -28,10 +28,12 @@
   <span class="spacer"></span>
 
   <!-- Thirds button basket -->
-  <button mat-fab extended class="btn-rentServeBasket">
-    <span>Panier</span>
-    <mat-icon>shopping_basket</mat-icon>
-  </button>
+  @if (isAuthenticated) {
+    <button mat-fab extended class="btn-rentServeBasket">
+      <span>Panier</span>
+      <mat-icon>shopping_basket</mat-icon>
+    </button>
+  }
 
   <!-- The right button for connect -->
   @if (isAuthenticated) {
