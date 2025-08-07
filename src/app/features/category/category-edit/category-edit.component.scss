@@ -1,25 +1,49 @@
-@use '@angular/material' as mat;
+//@use '@angular/material' as mat;
+//
+//.container-category {
+//  width: 100%;
+//  height: 90vh;
+//  justify-content: space-between;
+//}
+//
+//h1 {
+//text-align: center ;
+//}
+//
+//h3{
+//color:red;
+//}
+//
+//
 
-.container-category {
-  width: 100%;
-  height: 90vh;
-  justify-content: space-between;
+
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
 }
 
-h1 {
-text-align: center ;
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-h3{
-color:red;
-}
+.button-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
 
+  #btnSave{
+  background-color: green;
+  }
 
-#btnSave{
-background-color: green;
-}
-
-#btnDelete{
-  background-color: red;
-  color: white;
+  #btnDelete{
+    background-color: red;
+    color: white;
+  }
 }

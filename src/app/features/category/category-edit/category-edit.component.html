@@ -1,4 +1,4 @@
-<div class="container-category">
+<div class="page-container">
   <h1> Mise à jour de la categorie </h1>
 
   @if (message) {
@@ -8,15 +8,20 @@
   @if (messageSuccess) {
     {{ messageSuccess }}
   }
+  <h3> {{ categoryName }} </h3>
+
   <form [formGroup]="editCategory" class="example-form" (ngSubmit)="onSubmitEditCategory()">
-    <h3> {{ categoryName }} </h3>
     <mat-form-field class="example-full-width">
-      <mat-label>Categorie</mat-label>
+      <mat-label>Nom de la catégorie</mat-label>
       <input matInput #messageLenghtMax maxlength="150" formControlName="nameCategory">
       <mat-hint align="end">{{ messageLenghtMax.value.length }} / 150</mat-hint>
       <mat-error>Le champ ne doit pas être vide</mat-error>
     </mat-form-field>
-    <button mat-flat-button type="submit" id="btnSave">Sauvegarder</button>
+
+    <div class="button-group">
+      <button mat-flat-button type="submit" id="btnSave">Sauvegarder</button>
+      <button mat-button type="button" (click)="openDialogDeleteCategory(categoryId)" id="btnDelete">Supprimer</button>
+    </div>
   </form>
-  <button mat-button (click)="openDialogDeleteCategory(categoryId)" id="btnDelete">Supprimer</button>
 </div>
+
