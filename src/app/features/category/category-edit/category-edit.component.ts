@@ -8,10 +8,12 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialog} from '@angular/material/dialog';
 import {CategoryDeleteComponent} from '../category-delete/category-delete.component';
+import {NgClass} from '@angular/common';
+import {ThemeService} from '../../../core/services/theme.service';
 
 @Component({
   selector: 'app-category-edit',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule, NgClass],
   templateUrl: './category-edit.component.html',
   styleUrl: './category-edit.component.scss'
 })
@@ -22,12 +24,14 @@ export class CategoryEditComponent implements OnInit {
   editCategory!: FormGroup;
   message = '';
   messageSuccess = '';
+  isDarkMode = false;
 
   constructor(
     private readonly _categoryService: CategoryService,
     private readonly _fb: FormBuilder,
     private readonly _route: ActivatedRoute,
-    private readonly _dialog: MatDialog
+    private readonly _dialog: MatDialog,
+    private readonly _themeService: ThemeService,
   ) {
     this.editCategory = this._fb.group({
       nameCategory: ['', Validators.required]
@@ -38,6 +42,9 @@ export class CategoryEditComponent implements OnInit {
     this._route.paramMap.subscribe(params => {
       this.categoryId = Number(params.get('id'));
     })
+
+    this.isDarkMode = this._themeService.isDarkMode(); // Get current theme (dark or light)
+    this._themeService.darkMode$.subscribe((mode: boolean) => this.isDarkMode = mode); // Watch changes in dark mode (reactive)
 
     this._categoryService.getCategory(this.categoryId).subscribe({
       next: (data) => {
