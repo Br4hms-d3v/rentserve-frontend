@@ -46,8 +46,8 @@
     </button>
 
     <mat-menu #settingsMenu>
-      <menu mat-menu-item [routerLink]="'user/'+userId+'/edit-profile'">Modifier profile</menu>
-      <menu mat-menu-item (click)="logout()">Déconnecter</menu>
+      <button class="btnSetting" mat-menu-item [routerLink]="'user/'+userId+'/edit-profile'">Modifier profile</button>
+      <button class="btnSetting" mat-menu-item (click)="logout()">Déconnecter</button>
     </mat-menu>
   } @else {
     <button mat-fab extended (click)="openLoginModal()" class="btn-login">
