@@ -87,8 +87,6 @@ export class CategoryEditComponent implements OnInit {
 
   openDialogDeleteCategory(categoryId: number) {
     this._dialog.open(CategoryDeleteComponent, {
-      width: '500px',
-      height: '300px',
       data: {id: categoryId}
     })
 

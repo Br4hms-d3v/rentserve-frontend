@@ -1,18 +1,20 @@
-<h2 mat-dialog-title> Êtes-vous sûr de supprimer ? </h2>
-@if (message) {
-  {{message}}
-}
+<div [ngClass]="{'dark-mode-toolbar': isDarkMode, 'light-mode-toolbar': !isDarkMode}">
+  <h2 mat-dialog-title> Êtes-vous sûr de supprimer ? </h2>
+  @if (message) {
+    {{ message }}
+  }
 
-@if(messageSuccess){
-  {{messageSuccess}}
-}
-<mat-dialog-content class="mat-typography">
-  <h3> Vous allez supprimer: {{categoryName}} </h3>
-  <p>
-    Assurez-vous que tous les utilisateurs puissent récupérer leurs biens ou effectuer leur service
-  </p>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Annuler</button>
-  <button mat-button cdkFocusInitial (click)="onClickDeleteCategory()">Supprimer</button>
-</mat-dialog-actions>
+  @if (messageSuccess) {
+    {{ messageSuccess }}
+  }
+  <mat-dialog-content class="mat-typography">
+    <h3> Vous allez supprimer: {{ categoryName }} </h3>
+    <p>
+      Assurez-vous que tous les utilisateurs puissent récupérer leurs biens ou effectuer leur service
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button id="btnCancel" mat-button mat-dialog-close>Annuler</button>
+    <button id="btnConfirm" mat-button cdkFocusInitial (click)="onClickDeleteCategory()">Confirmer</button>
+  </mat-dialog-actions>
+</div>

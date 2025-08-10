@@ -5,9 +5,11 @@ import {
   MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
-  MatDialogContent, MatDialogRef,
+  MatDialogContent, MatDialogRef, MatDialogTitle,
 } from '@angular/material/dialog';
 import {MatButton} from '@angular/material/button';
+import {ThemeService} from '../../../core/services/theme.service';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-category-delete',
@@ -15,7 +17,9 @@ import {MatButton} from '@angular/material/button';
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
-    MatButton
+    MatButton,
+    NgClass,
+    MatDialogTitle
   ],
   templateUrl: './category-delete.component.html',
   styleUrl: './category-delete.component.scss'
@@ -26,11 +30,13 @@ export class CategoryDeleteComponent implements OnInit {
   categoryName = '';
   message = '';
   messageSuccess = '';
+  isDarkMode = false;
 
   constructor(
     private readonly _categoryService: CategoryService,
     private readonly _route: ActivatedRoute,
     private readonly _router: Router,
+    private readonly _themeService: ThemeService,
     @Inject(MAT_DIALOG_DATA) private readonly data: any,
     @Inject(MatDialogRef) private dialogRef: MatDialogRef<CategoryDeleteComponent>
   ) {
@@ -39,6 +45,9 @@ export class CategoryDeleteComponent implements OnInit {
   ngOnInit(): void {
     this.categoryId = this.data.id;
     console.log(this.categoryId)
+
+    this.isDarkMode = this._themeService.isDarkMode(); // Get current theme (dark or light)
+    this._themeService.darkMode$.subscribe((mode: boolean) => this.isDarkMode = mode); // Watch changes in dark mode (reactive)
 
     this._categoryService.getCategory(this.categoryId).subscribe({
       next: (data) => {
