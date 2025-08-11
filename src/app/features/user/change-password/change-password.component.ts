@@ -3,9 +3,10 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatError, MatFormField, MatInput, MatLabel, MatSuffix} from "@angular/material/input";
 import {MatIcon} from '@angular/material/icon';
-import {ChangePasswordForm} from '../models/change-password';
 import {UserService} from '../service/user.service';
 import {AuthService} from '../../../core/services/auth.service';
+import {NgClass} from '@angular/common';
+import {ThemeService} from '../../../core/services/theme.service';
 
 @Component({
   selector: 'app-change-password',
@@ -20,11 +21,13 @@ import {AuthService} from '../../../core/services/auth.service';
     MatIcon,
     MatIconButton,
     MatSuffix,
+    NgClass,
   ],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.scss'
 })
 export class ChangePasswordComponent implements OnInit {
+  isDarkMode = false; // Store dark mode state (true or false)
   hidePassword = true; // Control password visibility (true = hidden)
   editPasswordForm: FormGroup;
   userId: number | undefined;
@@ -32,6 +35,7 @@ export class ChangePasswordComponent implements OnInit {
   messageSuccess = '';
 
   constructor(
+    private readonly _themeService: ThemeService,
     private _userService: UserService,
     private authService: AuthService,
     private readonly _fb: FormBuilder
@@ -49,6 +53,9 @@ export class ChangePasswordComponent implements OnInit {
         this.userId = user.id;
       }
     })
+
+    this.isDarkMode = this._themeService.isDarkMode(); // Get current theme (dark or light)
+    this._themeService.darkMode$.subscribe((mode: boolean) => this.isDarkMode = mode); // Watch changes in dark mode (reactive)
 
   }
 
