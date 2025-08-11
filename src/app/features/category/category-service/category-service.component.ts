@@ -11,6 +11,8 @@ import {CategoryDeleteComponent} from '../category-delete/category-delete.compon
 import {MatSort} from '@angular/material/sort';
 import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '../../../core/services/auth.service';
+import {ThemeService} from '../../../core/services/theme.service';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-category-service',
@@ -21,6 +23,7 @@ import {AuthService} from '../../../core/services/auth.service';
     MatPaginator,
     MatButton,
     RouterLink,
+    NgClass,
   ],
   templateUrl: './category-service.component.html',
   styleUrl: './category-service.component.scss'
@@ -28,6 +31,7 @@ import {AuthService} from '../../../core/services/auth.service';
 
 export class CategoryServiceComponent implements OnInit {
 
+  isDarkMode = false;
   message: string = 'Nous ne trouvons pas la catégorie';
   displayedColumns: string[] = [];
   role: string | undefined;
@@ -40,10 +44,18 @@ export class CategoryServiceComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
 
-  constructor(private readonly _categoryService: CategoryService, private readonly _autService: AuthService, private readonly _dialog: MatDialog) {
+  constructor(
+    private readonly _categoryService: CategoryService,
+    private readonly _autService: AuthService,
+    private readonly _dialog: MatDialog,
+    private readonly _themeService: ThemeService,
+  ) {
   }
 
   ngOnInit(): void {
+    this.isDarkMode = this._themeService.isDarkMode(); // Get current theme (dark or light)
+    this._themeService.darkMode$.subscribe((mode: boolean) => this.isDarkMode = mode); // Watch changes in dark mode (reactive)
+
     this._autService.currentUser$.subscribe(user => {
       if (user) {
         this.role = user.role

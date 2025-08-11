@@ -1,3 +1,46 @@
 mat-form-field {
   width: 100%;
 }
+
+// Button to edit
+#btnEdit{
+  color: white;
+  background-color: #FF9720;
+  width:90px;
+}
+
+// Button to delete
+#btnDelete{
+  color: white;
+  background-color: #C31C19;
+  width:90px;
+}
+
+/* Change color for light mode */
+.light-mode-toolbar {
+  th{
+    color: #387190;
+
+  };
+
+  td{
+    color: #545E4C;
+    border-color: #387190;
+  }
+
+}
+
+/* Change color for dark mode */
+.dark-mode-toolbar {
+  th{
+    color: #19435a;
+    background-color: #D1D1D1;
+
+  };
+
+  td{
+    color: #2b2b2b;
+    background-color: #F0F0F0;
+    border-color: #19435a;
+  }
+}

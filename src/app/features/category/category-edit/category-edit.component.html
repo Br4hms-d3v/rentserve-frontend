@@ -1,4 +1,4 @@
-<div class="page-container">
+<div class="edit-container" [ngClass]="{'dark-mode-toolbar': isDarkMode, 'light-mode-toolbar': !isDarkMode}">
   <h1> Mise à jour de la categorie </h1>
 
   @if (message) {
@@ -11,7 +11,7 @@
   <h3> {{ categoryName }} </h3>
 
   <form [formGroup]="editCategory" class="example-form" (ngSubmit)="onSubmitEditCategory()">
-    <mat-form-field class="example-full-width">
+    <mat-form-field appearance="outline" id="formEditCategory">
       <mat-label>Nom de la catégorie</mat-label>
       <input matInput #messageLenghtMax maxlength="150" formControlName="nameCategory">
       <mat-hint align="end">{{ messageLenghtMax.value.length }} / 150</mat-hint>

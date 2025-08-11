@@ -1,8 +1,11 @@
 <mat-toolbar [ngClass]="{'dark-mode': isDarkMode, 'light-mode': !isDarkMode}">
   <!-- Logo is on left -->
-  <img src="/logo/logo_rentserve.jpg" alt="Logo" class="logo">
-  <span id="logoText">Rent-Serve</span>
-
+  <a routerLink="/dashboard">
+    <img src="/logo/logo_rentserve.jpg" alt="Logo" class="logo">
+  </a>
+  <a routerLink="/dashboard">
+    <span id="logoText">Rent-Serve</span>
+  </a>
   <!-- Space between buttons -->
   <span class="spacer"></span>
 
@@ -28,10 +31,12 @@
   <span class="spacer"></span>
 
   <!-- Thirds button basket -->
-  <button mat-fab extended class="btn-rentServeBasket">
-    <span>Panier</span>
-    <mat-icon>shopping_basket</mat-icon>
-  </button>
+  @if (isAuthenticated) {
+    <button mat-fab extended class="btn-rentServeBasket">
+      <span>Panier</span>
+      <mat-icon>shopping_basket</mat-icon>
+    </button>
+  }
 
   <!-- The right button for connect -->
   @if (isAuthenticated) {
@@ -41,8 +46,8 @@
     </button>
 
     <mat-menu #settingsMenu>
-      <menu mat-menu-item [routerLink]="'user/'+userId+'/edit-profile'">Modifier profile</menu>
-      <menu mat-menu-item (click)="logout()">Déconnecter</menu>
+      <button class="btnSetting" mat-menu-item [routerLink]="'user/'+userId+'/edit-profile'">Modifier profile</button>
+      <button class="btnSetting" mat-menu-item (click)="logout()">Déconnecter</button>
     </mat-menu>
   } @else {
     <button mat-fab extended (click)="openLoginModal()" class="btn-login">

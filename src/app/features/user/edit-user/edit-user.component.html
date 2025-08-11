@@ -1,7 +1,7 @@
-<mat-tab-group>
+<mat-tab-group [ngClass]="{'dark-mode': isDarkMode, 'light-mode': !isDarkMode}">
 
   <mat-tab label="Mise à jour du profil">
-    <h2>Editer profile</h2>
+    <h1>Editer profile</h1>
 
     @if (message) {
       <div class="msgError">

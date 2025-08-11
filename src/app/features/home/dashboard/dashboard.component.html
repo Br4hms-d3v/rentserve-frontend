@@ -1,11 +1,14 @@
-<div class="table-wrapper">
-  <!-- First table for materials -->
-  <div class="table-container">
-    <app-category-material/>
-  </div>
+<div [ngClass]="{'dark-mode-toolbar': isDarkMode, 'light-mode-toolbar': !isDarkMode}">
 
-  <!-- Second table for services -->
-  <div class="table-container">
-    <app-category-service/>
+  <div class="table-wrapper">
+    <!-- First table for materials -->
+    <div class="table-container">
+      <app-category-material/>
+    </div>
+
+    <!-- Second table for services -->
+    <div class="table-container">
+      <app-category-service/>
+    </div>
   </div>
 </div>

@@ -1,23 +1,25 @@
-h2{
+@use '@angular/material' as mat;
+
+h1 {
   text-align: center;
   font-family: 'Libre Baskerville italic', serif;
-  color: #6d7c5f;
+  margin-bottom: -15px;
 }
 
-.tableauUserUpdate{
+.tableauUserUpdate {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 81vh;
 }
 
-.tabUpdateUser{
+.tabUpdateUser {
   min-width: 150px;
   max-width: 700px;
   width: 100%;
 }
 
-.inputMatField{
+.inputMatField {
   width: 100%;
 }
 
@@ -25,4 +27,97 @@ td {
   padding-right: 8px;
   width: 500px;
   vertical-align: top;
+}
+
+/**
+* Style for light mode
+ */
+.light-mode {
+
+  background-color: #f0f0f0;
+
+  h1 {
+    color: #6d7c5f;
+  }
+
+  // Mat tab label
+  @include mat.tabs-overrides((
+    active-indicator-color:#4E9442,
+    active-focus-indicator-color:#4E9442,
+    active-hover-indicator-color:#4E9442,
+
+    inactive-label-text-color: #6d7c5f,
+    active-label-text-color:#545E4C,
+    active-focus-label-text-color:#545E4C,
+    inactive-hover-label-text-color:#4E9442,
+    active-hover-label-text-color:#4E9442,
+  ));
+
+  // Color for form edit
+  .inputMatField {
+    @include mat.form-field-overrides((
+      outlined-outline-color: #6D7C5F,
+      outlined-focus-outline-color: #6D7C5F,
+      outlined-caret-color: #6D7C5F,
+      outlined-hover-outline-color: #6D7C5F,
+      outlined-label-text-color: #6D7C5F,
+      outlined-focus-label-text-color: #6D7C5F,
+      outlined-hover-label-text-color: #4E9442,
+      outlined-input-text-placeholder-color:#4E9442,
+      outlined-input-text-color: #545E4C,
+    ));
+  }
+
+  // Buton to edit
+  button{
+    background-color: #FF9720;
+    color:white;
+  }
+}
+
+/**
+ * Style for dark mode
+ **/
+.dark-mode {
+
+  background-color: #2b2b2b;
+
+  h1 {
+    color: #CCD5B9;
+  }
+
+  @include mat.tabs-overrides((
+    active-indicator-color:#BaF2B5,
+    active-focus-indicator-color:#BaF2B5,
+    active-hover-indicator-color:#BaF2B5,
+
+    //
+    inactive-label-text-color: #CCD5B9,
+    active-label-text-color:#cbd1c1,
+    active-focus-label-text-color:#cbd1c1,
+    inactive-hover-label-text-color:#BaF2B5,
+    active-hover-label-text-color:#BaF2B5,
+  ));
+
+  // Color for form edit
+  .inputMatField {
+    @include mat.form-field-overrides((
+      outlined-outline-color: #CBD1C1,
+      outlined-focus-outline-color: #CBD1C1,
+      outlined-caret-color: #CBD1C1,
+      outlined-hover-outline-color: #CBD1C1,
+      outlined-label-text-color: #CBD1C1,
+      outlined-focus-label-text-color: #CBD1C1,
+      outlined-hover-label-text-color: #BAF2B5,
+      outlined-input-text-placeholder-color:#BAF2B5,
+      outlined-input-text-color: #CCD5B9,
+    ));
+  }
+
+  // Buton to edit
+  button{
+    background-color: #FF9720;
+    color: black;
+  }
+
 }

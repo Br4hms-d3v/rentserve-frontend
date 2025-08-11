@@ -12,6 +12,8 @@ import {UserDto} from '../models/userDto';
 import {UpdateUserForm} from '../models/update-user';
 import {AuthService} from '../../../core/services/auth.service';
 import {MatTabsModule} from '@angular/material/tabs';
+import {ThemeService} from '../../../core/services/theme.service';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-edit-user',
@@ -26,13 +28,15 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatButton,
     ChangePasswordComponent,
     DeleteUserComponent,
-    MatTabsModule
+    MatTabsModule,
+    NgClass
   ],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss'
 })
 export class EditUserComponent implements OnInit {
 
+  isDarkMode = false; // Store dark mode state (true or false)
   userId!: number;
   updateUserForm!: UpdateUserForm;
   userDto!: UserDto;
@@ -41,6 +45,7 @@ export class EditUserComponent implements OnInit {
   messageSuccess = '';
 
   constructor(
+    private readonly _themeService: ThemeService,
     private userService: UserService,
     private _authService: AuthService,
     private readonly _fb: FormBuilder,
@@ -60,6 +65,8 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isDarkMode = this._themeService.isDarkMode(); // Get current theme (dark or light)
+    this._themeService.darkMode$.subscribe((mode: boolean) => this.isDarkMode = mode); // Watch changes in dark mode (reactive)
 
     this._route.paramMap.subscribe(params => {
       this.userId = Number(params.get('id'));

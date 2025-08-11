@@ -13,3 +13,21 @@
   margin-right: 25px;
   margin-left: 25px;
 }
+
+
+/* Change color for light mode */
+.light-mode-toolbar {
+
+  // background color for dashboard page
+  .table-wrapper {
+    background-color: #f0f0f0;
+  }
+}
+
+
+/* Change color for dark mode */
+.dark-mode-toolbar {
+  .table-wrapper {
+    background-color: #2b2b2b;
+  }
+}

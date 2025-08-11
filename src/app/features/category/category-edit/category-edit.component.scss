@@ -1,24 +1,7 @@
-//@use '@angular/material' as mat;
-//
-//.container-category {
-//  width: 100%;
-//  height: 90vh;
-//  justify-content: space-between;
-//}
-//
-//h1 {
-//text-align: center ;
-//}
-//
-//h3{
-//color:red;
-//}
-//
-//
+@use '@angular/material' as mat;
 
-
-
-.page-container {
+// Contain the all page
+.edit-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,23 +10,98 @@
   text-align: center;
 }
 
+// Title 1
+h1 {
+  font-family: 'Libre Baskerville italic', serif;
+  font-size: 35px;
+  color: #6d7c5f;
+}
+
+// Second title "name of category"
+h3 {
+  font-family: 'Libre Baskerville italic', serif;
+  color: #545E4C;
+}
+
+// form for edit category
 .form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+// Button for back and delete
 .button-group {
   display: flex;
   gap: 16px;
   margin-top: 8px;
 
-  #btnSave{
-  background-color: green;
+  #btnSave {
+    background-color: #4E9442;
   }
 
-  #btnDelete{
-    background-color: red;
+  #btnDelete {
+    background-color: #C31C19;
     color: white;
   }
+}
+
+/* Change color for light mode */
+.light-mode-toolbar {
+
+  // Background color
+  background-color: #F0F0F0;
+
+  h1 {
+    color: #6d7c5f;
+  }
+
+  h3 {
+    color: #545E4C;
+  }
+
+  // Color for form login
+  #formEditCategory {
+    @include mat.form-field-overrides((
+      outlined-outline-color: #6D7C5F,
+      outlined-focus-outline-color: #6D7C5F,
+      outlined-caret-color: #6D7C5F,
+      outlined-hover-outline-color: #6D7C5F,
+      outlined-label-text-color: #6D7C5F,
+      outlined-focus-label-text-color: #6D7C5F,
+      outlined-hover-label-text-color: #4E9442,
+      outlined-input-text-placeholder-color:#4E9442,
+    ));
+  }
+
+}
+
+/* Change color for dark mode */
+.dark-mode-toolbar {
+
+  // Background color
+  background-color: #2b2b2b;
+
+  h1 {
+    color: #CCD5B9;
+  }
+
+  h3 {
+    color: #cbd1c1;
+  }
+
+  #formEditCategory {
+    @include mat.form-field-overrides((
+      outlined-outline-color: #CBD1C1,
+      outlined-focus-outline-color: #CBD1C1,
+      outlined-caret-color: #CBD1C1,
+      outlined-hover-outline-color: #CBD1C1,
+      outlined-label-text-color: #CBD1C1,
+      outlined-focus-label-text-color: #CBD1C1,
+      outlined-hover-label-text-color: #BAF2B5,
+      outlined-input-text-placeholder-color:#BAF2B5,
+      outlined-input-text-color: #CCD5B9,
+    ));
+  }
+
 }
