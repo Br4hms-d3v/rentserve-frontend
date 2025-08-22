@@ -2,7 +2,6 @@
 
 // Body
 .cards-container {
-  background-color: #f0f0f0;
   height: 100vh;
   width: 100%;
   margin-top: -22px;
@@ -10,7 +9,6 @@
 
 // Title
 h1 {
-  color: #6d7c5f;
   font-family: 'Libre Baskerville italic', serif;
   text-align: center;
   padding: 20px;
@@ -30,17 +28,86 @@ h1 {
 
   mat-card-header {
     justify-content: center;
+  }
+}
+
+// Paginator
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+/* Change color for light mode */
+.light-mode-toolbar {
+
+  //Body
+  background-color: #f0f0f0;
+
+  // Title
+  h1 {
+    color: #6d7c5f;
+  }
+
+  mat-card-header {
     color: #545E4C;
+  }
+
+  // Card
+  .cards-material-category {
+    @include mat.card-overrides((
+      outlined-outline-color: #4E9442,
+      outlined-container-color: #E0E0E0,
+      title-text-font: italic,
+      title-text-size: 20px,
+    ))
+  }
+
+  // Paginator
+  .pagination {
+    @include mat.paginator-overrides((
+      container-text-color: #4E9442,
+      container-background-color: #f0f0f0,
+      enabled-icon-color: #4E9442,
+      container-text-size: 14px,
+    ))
   }
 
 }
 
-.cards-material-category {
-  @include mat.card-overrides((
-    outlined-outline-color: #4E9442,
-    title-text-font: italic,
-    title-text-size: 20px,
-  ))
+/* Change color for dark mode */
+.dark-mode-toolbar {
+
+  //Body
+  background-color: #2b2b2b;
+
+  // Title
+  h1 {
+    color: #CCD5B9;
+  }
+
+  mat-card-header {
+    color: #cbd1c1;
+  }
+
+  // card
+  .cards-material-category {
+    @include mat.card-overrides((
+      outlined-outline-color: #BaF2B5,
+      outlined-container-color: #525252,
+      title-text-font: italic,
+      title-text-size: 20px,
+    ))
+  }
+
+  // Paginator
+  .pagination {
+    @include mat.paginator-overrides((
+      container-text-color: #BaF2B5,
+      container-background-color: #2b2b2b,
+      enabled-icon-color: #BaF2B5,
+      container-text-size: 14px,
+    ))
+  }
 
 }
 
