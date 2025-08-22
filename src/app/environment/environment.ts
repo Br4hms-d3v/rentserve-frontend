@@ -4,4 +4,5 @@ export const environment = {
   authEndPoint: '/api/auth',  // Path for authentication routes
   userEndPoint: '/api/user', // Path for user routes
   categoryEndPoint: '/api/categories', // Path for category routes
+  materialEndPoint: '/api/material' // Path for material routes
 }
