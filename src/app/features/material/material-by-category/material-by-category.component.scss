@@ -1,0 +1,47 @@
+@use '@angular/material' as mat;
+
+// Body
+.cards-container {
+  background-color: #f0f0f0;
+  height: 100vh;
+  width: 100%;
+  margin-top: -22px;
+}
+
+// Title
+h1 {
+  color: #6d7c5f;
+  font-family: 'Libre Baskerville italic', serif;
+  text-align: center;
+  padding: 20px;
+}
+
+// Cards for material
+.cards {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  mat-card {
+    width: 280px;
+  }
+
+  mat-card-header {
+    justify-content: center;
+    color: #545E4C;
+  }
+
+}
+
+.cards-material-category {
+  @include mat.card-overrides((
+    outlined-outline-color: #4E9442,
+    title-text-font: italic,
+    title-text-size: 20px,
+  ))
+
+}
+
+

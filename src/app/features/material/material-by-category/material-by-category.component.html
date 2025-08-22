@@ -1,0 +1,23 @@
+<div class="cards-container">
+  <h1>Liste par catégorie: </h1>
+
+  @if (message) {
+    {{ message }}
+  }
+
+  <div class="cards">
+
+    @for (material of materialsByCategory; track material.id) {
+      <mat-card appearance="outlined" class="cards-material-category">
+        <mat-card-header>
+          <mat-card-title>{{ material.nameMaterial }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-actions align="end">
+          <button matButton>Voir</button>
+        </mat-card-actions>
+      </mat-card>
+    }
+
+
+  </div>
+</div>
