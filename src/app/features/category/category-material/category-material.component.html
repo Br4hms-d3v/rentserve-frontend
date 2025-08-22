@@ -13,14 +13,14 @@
   <!-- Name Column -->
   <ng-container matColumnDef="nameOfCategoryMat">
     <th mat-header-cell *matHeaderCellDef> Matériels</th>
-    <td mat-cell *matCellDef="let categoryMaterial"> {{ categoryMaterial.nameOfCategoryMat }}</td>
+    <td mat-cell *matCellDef="let categoryMaterial"> <a id="linkToMaterial" [routerLink]="['/material', categoryMaterial.nameOfCategoryMat]">{{ categoryMaterial.nameOfCategoryMat }}</a></td>
   </ng-container>
 
 
   <ng-container matColumnDef="editCategoryMat">
     <th mat-header-cell *matHeaderCellDef> Modifier</th>
     <td mat-cell *matCellDef="let categoryMaterial">
-      <button id="btnEdit" mat-button [routerLink]="['/category/'+categoryMaterial.idCategory+'/edit-category']">modifier</button>
+      <button id="btnEdit" mat-button [routerLink]="['/category', categoryMaterial.idCategory, 'edit-category']">modifier</button>
     </td>
   </ng-container>
 
