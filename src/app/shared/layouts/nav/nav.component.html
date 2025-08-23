@@ -12,7 +12,7 @@
   <!-- First button materials  -->
   <!-- Display the button when the user is connected -->
   @if (isAuthenticated) {
-    <button mat-fab extended class="btn-rentServeBasket">
+    <button [routerLink]="['/material/list/all']" mat-fab extended class="btn-rentServeBasket">
       <mat-icon>construction</mat-icon>
       Matériels
     </button>
