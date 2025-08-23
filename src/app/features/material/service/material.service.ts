@@ -35,4 +35,9 @@ export class MaterialService {
     return this._http.get<MaterialDto[]>(this.apiUrl + '/category/' + nameCategory, {headers})
   }
 
+  getMaterials() {
+    const headers = this.getAuthHeader();
+    return this._http.get<MaterialDto[]>(this.apiUrl + '/list', {headers})
+  }
+
 }
