@@ -9,6 +9,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {AuthService} from '../../../core/services/auth.service';
+import {MaterialByIdComponent} from '../material-by-id/material-by-id.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-material-list',
@@ -42,6 +44,7 @@ export class MaterialListComponent implements OnInit {
     private readonly _materialService: MaterialService,
     private readonly _authService: AuthService,
     private readonly _themeService: ThemeService,
+    private dialog: MatDialog,
   ) {
   }
 
@@ -92,6 +95,12 @@ export class MaterialListComponent implements OnInit {
   getTheme() {
     this.isDarkMode = this._themeService.isDarkMode(); // Get current theme (dark or light)
     this._themeService.darkMode$.subscribe((mode: boolean) => this.isDarkMode = mode); // Watch changes in dark mode (reactive)
+  }
+
+  openDetailDialog(id: number) {
+    this.dialog.open(MaterialByIdComponent, {
+      data: {id: id}
+    })
   }
 
 }
