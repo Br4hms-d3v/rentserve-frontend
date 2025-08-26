@@ -5,6 +5,10 @@ import {MatCard, MatCardActions, MatCardHeader, MatCardTitle} from '@angular/mat
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {ThemeService} from '../../../core/services/theme.service';
 import {NgClass} from '@angular/common';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {AuthService} from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-material-list',
@@ -14,7 +18,10 @@ import {NgClass} from '@angular/common';
     MatCardHeader,
     MatCardTitle,
     MatPaginator,
+    MatButtonModule,
+    MatMenuModule,
     NgClass,
+    MatIcon,
   ],
   templateUrl: './material-list.component.html',
   styleUrl: './material-list.component.scss'
@@ -23,6 +30,7 @@ export class MaterialListComponent implements OnInit {
 
   materials: MaterialDto[] = [];
   message = '';
+  role: string | undefined;
 
   pagedMaterials: any[] = [];
   pageSize = 25;
@@ -32,12 +40,14 @@ export class MaterialListComponent implements OnInit {
 
   constructor(
     private readonly _materialService: MaterialService,
+    private readonly _authService: AuthService,
     private readonly _themeService: ThemeService,
   ) {
   }
 
   ngOnInit() {
     this.getMaterials();
+    this.getRole();
     this.getTheme();
   }
 
@@ -55,6 +65,14 @@ export class MaterialListComponent implements OnInit {
         } else {
           this.message = "Erreur lors de l'affichage";
         }
+      }
+    })
+  }
+
+  getRole() {
+    this._authService.currentUser$.subscribe(user => {
+      if (user) {
+        this.role = user.role;
       }
     })
   }

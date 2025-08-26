@@ -2,7 +2,7 @@
 
 // Body
 .cards-container {
-  height: 100vh;
+  height: 110vh;
   width: 100%;
   margin-top: -22px;
 }
@@ -29,6 +29,11 @@ h1 {
   mat-card-header {
     justify-content: center;
   }
+}
+
+//Space between button
+.spacer {
+  flex: 1 1 auto;
 }
 
 // Paginator
@@ -62,6 +67,42 @@ h1 {
     ))
   }
 
+  // Button Display menu
+  .btn-menu .mat-mdc-button-base {
+    color: #4E9442;
+    --mdc-outlined-button-outline-color: #4E9442;
+    --mat-outlined-button-ripple-color: #4E9442;
+    --mat-outlined-button-state-layer-color: #4E9442;
+    --mat-outlined-button-hover-state-layer-opacity: 0.10;
+    --mat-outlined-button-focus-state-layer-opacity: 0.10;
+    --mat-outlined-button-pressed-state-layer-opacity: 0.10;
+
+    &:hover {
+      color: white;
+      background-color: #6d7c5f;
+      --mat-outlined-button-hover-state-layer-opacity: 0.60;
+    }
+  }
+
+  // Button Show materials
+  .btn-show .mat-mdc-button-base {
+    color: #4E9442;
+    --mdc-outlined-button-outline-color: #4E9442;
+    --mat-outlined-button-ripple-color: #4E9442;
+    --mat-outlined-button-state-layer-color: #4E9442;
+    --mat-outlined-button-hover-state-layer-opacity: 0.10;
+    --mat-outlined-button-focus-state-layer-opacity: 0.10;
+    --mat-outlined-button-pressed-state-layer-opacity: 0.10;
+    --mdc-outlined-button-label-text-weight: 400;
+    --mdc-outlined-button-label-text-size: 17px;
+
+    &:hover {
+      color: white;
+      background-color: #6d7c5f;
+      --mat-outlined-button-hover-state-layer-opacity: 0.60;
+    }
+  }
+
   // Paginator
   .pagination {
     @include mat.paginator-overrides((
@@ -71,6 +112,7 @@ h1 {
       container-text-size: 14px,
     ))
   }
+
 
 }
 
@@ -89,7 +131,7 @@ h1 {
     color: #cbd1c1;
   }
 
-  // card
+  // Card
   .cards-material-category {
     @include mat.card-overrides((
       outlined-outline-color: #BaF2B5,
@@ -97,6 +139,42 @@ h1 {
       title-text-font: italic,
       title-text-size: 20px,
     ))
+  }
+
+  // Button Display menu
+  .btn-menu .mat-mdc-button-base {
+    color: #BaF2B5;
+    --mdc-outlined-button-outline-color: #BaF2B5;
+    --mat-outlined-button-ripple-color: #BaF2B5;
+    --mat-outlined-button-state-layer-color: #BaF2B5;
+    --mat-outlined-button-hover-state-layer-opacity: 0.10;
+    --mat-outlined-button-focus-state-layer-opacity: 0.10;
+    --mat-outlined-button-pressed-state-layer-opacity: 0.10;
+
+    &:hover {
+      color: black;
+      background-color: #BaF2B5;
+      --mat-outlined-button-hover-state-layer-opacity: 0.60;
+    }
+  }
+
+  // Button Show materials from user
+  .btn-show .mat-mdc-button-base {
+    color: #BaF2B5;
+    --mdc-outlined-button-outline-color: #BaF2B5;
+    --mat-outlined-button-ripple-color: #BaF2B5;
+    --mat-outlined-button-state-layer-color: #BaF2B5;
+    --mat-outlined-button-hover-state-layer-opacity: 0.10;
+    --mat-outlined-button-focus-state-layer-opacity: 0.10;
+    --mat-outlined-button-pressed-state-layer-opacity: 0.10;
+    --mdc-outlined-button-label-text-weight: 400;
+    --mdc-outlined-button-label-text-size: 17px;
+
+    &:hover {
+      color: black;
+      background-color: #BaF2B5;
+      --mat-outlined-button-hover-state-layer-opacity: 0.60;
+    }
   }
 
   // Paginator
