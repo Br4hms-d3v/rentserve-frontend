@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environment/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {MaterialDto} from '../model/material';
+import {MaterialDetailDto} from '../model/material-detail';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,11 @@ export class MaterialService {
   getMaterials() {
     const headers = this.getAuthHeader();
     return this._http.get<MaterialDto[]>(this.apiUrl + '/list', {headers})
+  }
+
+  getMaterial(id: number) {
+    const headers = this.getAuthHeader();
+    return this._http.get<MaterialDetailDto>(this.apiUrl + '/' + id, {headers})
   }
 
 }

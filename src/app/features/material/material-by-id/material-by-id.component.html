@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>{{ material.nameMaterial }}</h2>
+<mat-dialog-content>
+  <h4>Catégorie:</h4>
+  <p>
+    {{ material.category }}
+  </p>
+
+  <h4> État:</h4>
+  @if (isAvailable) {
+    <p>Actif</p>
+  } @else {
+    <p>Inactif</p>
+  }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Fermer</button>
+</mat-dialog-actions>
