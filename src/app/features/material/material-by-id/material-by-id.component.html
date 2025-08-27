@@ -1,17 +1,20 @@
-<h2 mat-dialog-title>{{ material.nameMaterial }}</h2>
-<mat-dialog-content>
-  <h4>Catégorie:</h4>
-  <p>
-    {{ material.category }}
-  </p>
+<div [ngClass]="{'dark-mode': isDarkMode, 'light-mode': !isDarkMode}">
+  <h2 mat-dialog-title>{{ material?.nameMaterial }}</h2>
+  <mat-dialog-content>
+    <h3>Catégorie:</h3>
+    <p>
+      {{ material?.category }}
+    </p>
 
-  <h4> État:</h4>
-  @if (isAvailable) {
-    <p>Actif</p>
-  } @else {
-    <p>Inactif</p>
-  }
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Fermer</button>
+    <h3> État:</h3>
+    @if (isAvailable) {
+      <p>Actif</p>
+    } @else {
+      <p>Inactif</p>
+    }
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+<button mat-button mat-dialog-close class="btn-close-dialog">Fermer</button>
 </mat-dialog-actions>
+
+</div>

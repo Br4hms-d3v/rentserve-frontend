@@ -10,6 +10,7 @@ import {MaterialService} from '../service/material.service';
 import {ThemeService} from '../../../core/services/theme.service';
 import {MaterialDetailDto} from '../model/material-detail';
 import {MatButtonModule} from '@angular/material/button';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-material-by-id',
@@ -18,7 +19,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
-    MatButtonModule
+    MatButtonModule,
+    NgClass
   ],
   templateUrl: './material-by-id.component.html',
   styleUrl: './material-by-id.component.scss'
@@ -28,7 +30,7 @@ export class MaterialByIdComponent implements OnInit {
   materialById!: number;
   material!: MaterialDetailDto;
   isAvailable!: boolean;
-
+  isDarkMode = false; // Store dark mode state (true or false)
 
   constructor(
     private readonly _materialService: MaterialService,
@@ -40,6 +42,7 @@ export class MaterialByIdComponent implements OnInit {
 
   ngOnInit() {
     this.getMaterial();
+    this.getTheme()
   }
 
   getMaterial() {
@@ -49,6 +52,11 @@ export class MaterialByIdComponent implements OnInit {
         this.isAvailable = data.isAvailable;
       }
     })
+  }
+
+  getTheme() {
+    this.isDarkMode = this._themeService.isDarkMode(); // Get current theme (dark or light)
+    this._themeService.darkMode$.subscribe((mode: boolean) => this.isDarkMode = mode); // Watch changes in dark mode (reactive)
   }
 
 }
