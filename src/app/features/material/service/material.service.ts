@@ -3,6 +3,7 @@ import {environment} from '../../../environment/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {MaterialDto} from '../model/material';
 import {MaterialDetailDto} from '../model/material-detail';
+import {MaterialForm} from '../model/material-form';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,11 @@ export class MaterialService {
   getMaterial(id: number) {
     const headers = this.getAuthHeader();
     return this._http.get<MaterialDetailDto>(this.apiUrl + '/' + id, {headers})
+  }
+
+  editMaterial(id: number | null | undefined, form: MaterialForm) {
+    const headers = this.getAuthHeader();
+    return this._http.put<MaterialForm>(this.apiUrl + '/' + id + '/edit', form, {headers})
   }
 
 }
