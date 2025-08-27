@@ -11,6 +11,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {AuthService} from '../../../core/services/auth.service';
 import {MaterialByIdComponent} from '../material-by-id/material-by-id.component';
 import {MatDialog} from '@angular/material/dialog';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-material-list',
@@ -24,6 +25,7 @@ import {MatDialog} from '@angular/material/dialog';
     MatMenuModule,
     NgClass,
     MatIcon,
+    RouterLink,
   ],
   templateUrl: './material-list.component.html',
   styleUrl: './material-list.component.scss'

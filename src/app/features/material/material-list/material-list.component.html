@@ -21,7 +21,7 @@
           <mat-menu #sousMenuMaterial="matMenu">
             <button mat-menu-item (click)="openDetailDialog(material.id)">Détailler</button>
             @if (role === 'MODERATOR' || role === 'ADMIN') {
-              <button mat-menu-item>Modifier</button>
+              <button mat-menu-item [routerLink]="['/material', material.id, 'edit']">Modifier</button>
             }
             @if (role === 'ADMIN') {
               <button mat-menu-item>Supprimer</button>
