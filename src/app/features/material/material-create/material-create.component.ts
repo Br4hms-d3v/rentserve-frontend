@@ -8,7 +8,7 @@ import {MatButton} from '@angular/material/button';
 import {map, Observable, startWith} from 'rxjs';
 import {CategoryService} from '../../category/service/category.service';
 import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from '@angular/material/autocomplete';
-import {AsyncPipe, NgClass, NgForOf} from '@angular/common';
+import {AsyncPipe, NgClass} from '@angular/common';
 import {ThemeService} from '../../../core/services/theme.service';
 
 @Component({
@@ -25,7 +25,6 @@ import {ThemeService} from '../../../core/services/theme.service';
     MatAutocompleteTrigger,
     MatAutocomplete,
     MatOption,
-    NgForOf,
     AsyncPipe,
     NgClass
   ],

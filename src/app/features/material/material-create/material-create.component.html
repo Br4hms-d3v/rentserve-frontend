@@ -16,7 +16,7 @@
         <mat-autocomplete #listCategories="matAutocomplete">
           <!--          <mat-option *ngFor="let category of filteredCategories | async" [value]="category.nameCategory">-->
 
-          @for ( category of filteredCategories?.forEach(); track category | async) {
+          @for ( category of filteredCategories | async; track category ) {
             <mat-option [value]="category.nameCategory">
               <p>{{ category.nameCategory }}</p>
             </mat-option>
