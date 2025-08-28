@@ -39,6 +39,7 @@ export class MaterialCreateComponent implements OnInit {
   isDarkMode = false; // Store dark mode state (true or false)
   message!: string;
   messageSuccess!: string;
+  title = 'Nouveau materiel';
 
   constructor(
     private readonly _materialService: MaterialService,
@@ -73,7 +74,7 @@ export class MaterialCreateComponent implements OnInit {
           startWith(''),
           map((value: string) => this._filterCategories(value || ''))
         )
-        console.log(this.categoryDto);
+        // console.log(this.categoryDto);
       },
       error: (err) => {
         this.message = "Une erreur est survenue.";

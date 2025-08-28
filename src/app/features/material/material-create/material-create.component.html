@@ -1,48 +1,57 @@
-<div [ngClass]="{'dark-mode-toolbar': isDarkMode, 'light-mode-toolbar': !isDarkMode}">
-  <h1> Nouveau materiel</h1>
+<div class="container-create-material" [ngClass]="{'dark-mode': isDarkMode, 'light-mode': !isDarkMode}">
 
-  @if (messageSuccess) {
-    {{ messageSuccess }}
-  }
-  @if (message) {
-    {{ message }}
-  }
+  <div>
+    @if (messageSuccess) {
+      {{ messageSuccess }}
+    }
+    @if (message) {
+      {{ message }}
+    }
+  </div>
 
-  <form [formGroup]="newMaterialForm" (ngSubmit)="onSubmitNewMaterial()">
-    <p>
-      <mat-form-field appearance="outline">
-        <mat-label>Nom de la catégorie:</mat-label>
-        <input matInput type="text" [matAutocomplete]="listCategories" formControlName="category">
-        <mat-autocomplete #listCategories="matAutocomplete">
-          <!--          <mat-option *ngFor="let category of filteredCategories | async" [value]="category.nameCategory">-->
+  <div class="h1">
+    {{title}}
+  </div>
 
-          @for ( category of filteredCategories | async; track category ) {
-            <mat-option [value]="category.nameCategory">
-              <p>{{ category.nameCategory }}</p>
-            </mat-option>
+  <div class="form-create-material">
+
+    <form [formGroup]="newMaterialForm" (ngSubmit)="onSubmitNewMaterial()">
+      <p>
+        <mat-form-field appearance="outline" class="inputMatField">
+          <mat-label>Nom de la catégorie:</mat-label>
+          <input matInput type="text" [matAutocomplete]="listCategories" formControlName="category">
+          <mat-autocomplete #listCategories="matAutocomplete">
+            <!--          <mat-option *ngFor="let category of filteredCategories | async" [value]="category.nameCategory">-->
+
+            @for (category of filteredCategories | async; track category) {
+              <mat-option [value]="category.nameCategory">
+                <p>{{ category.nameCategory }}</p>
+              </mat-option>
+            }
+          </mat-autocomplete>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="outline" class="inputMatField">
+          <mat-label>Nom du material:</mat-label>
+          <input matInput placeholder="Placeholder" formControlName="nameMaterial">
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-slide-toggle formControlName="isAvailable">
+          @if (newMaterialForm.get('isAvailable')?.value) {
+            <p class="textSlideActivated">Actif</p>
+          } @else {
+            <p class="textSlideDeactivated">désactivé</p>
           }
-        </mat-autocomplete>
-      </mat-form-field>
-    </p>
+        </mat-slide-toggle>
+      </p>
 
-    <p>
-      <mat-form-field appearance="outline">
-        <mat-label>Nom du material:</mat-label>
-        <input matInput placeholder="Placeholder" formControlName="nameMaterial">
-      </mat-form-field>
-    </p>
-
-    <p>
-      <mat-slide-toggle formControlName="isAvailable">
-        @if (newMaterialForm.get('isAvailable')?.value) {
-          <p>Actif</p>
-        } @else {
-          <p>desactivé</p>
-        }
-      </mat-slide-toggle>
-    </p>
-
-    <button mat-raised-button type="submit">Sauvegarder</button>
-  </form>
-
+      <div class="btn-save">
+        <button mat-stroked-button type="submit">Sauvegarder</button>
+      </div>
+    </form>
+  </div>
 </div>
