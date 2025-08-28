@@ -1,31 +1,43 @@
-<div class="container-edit">
+<div class="container-edit" [ngClass]="{'dark-mode': isDarkMode, 'light-mode': !isDarkMode}">
+
   <h1> Modification </h1>
 
-  <form [formGroup]="editMaterialForm" (ngSubmit)="onSubmitEditMaterial()">
-    <p>
-      <mat-form-field appearance="outline">
-        <mat-label>Categorie:</mat-label>
-        <input matInput placeholder="Placeholder" formControlName="category">
-      </mat-form-field>
-    </p>
+  @if (messageSuccess) {
+    <p class="messageSuccess">{{ messageSuccess }}</p>
+  }
 
-    <p>
-      <mat-form-field appearance="outline">
-        <mat-label>Nom du material:</mat-label>
-        <input matInput placeholder="Placeholder" formControlName="nameMaterial">
-      </mat-form-field>
-    </p>
+  @if (message) {
+    <p class="message">{{ message }}</p>
+  }
 
-    <p>
-      <mat-slide-toggle formControlName="isAvailable">
-        @if (editMaterialForm.get('isAvailable')?.value) {
-          <p>Matériel activé</p>
-        } @else {
-          <p>Matériel désactivé</p>
-        }
-      </mat-slide-toggle>
-    </p>
+  <div class="formEditMaterial">
 
-    <button mat-raised-button type="submit">Modifier</button>
-  </form>
+    <form [formGroup]="editMaterialForm" (ngSubmit)="onSubmitEditMaterial()">
+      <p>
+        <mat-form-field appearance="outline" class="inputMatField">
+          <mat-label>Categorie:</mat-label>
+          <input matInput placeholder="Placeholder" formControlName="category">
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="outline" class="inputMatField">
+          <mat-label>Nom du material:</mat-label>
+          <input matInput placeholder="Placeholder" formControlName="nameMaterial">
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-slide-toggle formControlName="isAvailable">
+          @if (editMaterialForm.get('isAvailable')?.value) {
+            <p class="textSlideActivated">Matériel activé</p>
+          } @else {
+            <p class="textSlideDeactivated">Matériel désactivé</p>
+          }
+        </mat-slide-toggle>
+      </p>
+
+      <button mat-raised-button type="submit">Modifier</button>
+    </form>
+  </div>
 </div>

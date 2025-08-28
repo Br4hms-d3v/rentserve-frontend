@@ -8,6 +8,8 @@ import {MaterialService} from '../service/material.service';
 import {ActivatedRoute} from '@angular/router';
 import {MaterialDetailDto} from '../model/material-detail';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {ThemeService} from '../../../core/services/theme.service';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-material-edit',
@@ -18,6 +20,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ReactiveFormsModule,
     MatSlideToggleModule,
     FormsModule,
+    NgClass,
   ],
   templateUrl: './material-edit.component.html',
   styleUrl: './material-edit.component.scss'
@@ -31,11 +34,13 @@ export class MaterialEditComponent implements OnInit {
   isAvailable!: boolean;
   message = ''
   messageSuccess = ''
+  isDarkMode = false; // Store dark mode state (true or false)
 
   constructor(
     private readonly _materialService: MaterialService,
     private readonly _fb: FormBuilder,
     private readonly _route: ActivatedRoute,
+    private readonly _themeService: ThemeService,
   ) {
     this.editMaterialForm = this._fb.group({
       nameMaterial: ['', Validators.required],
@@ -51,6 +56,7 @@ export class MaterialEditComponent implements OnInit {
     })
 
     this.getMaterial();
+    this.getTheme();
 
   }
 
@@ -100,6 +106,11 @@ export class MaterialEditComponent implements OnInit {
         }
       }
     })
+  }
+
+  getTheme() {
+    this.isDarkMode = this._themeService.isDarkMode(); // Get current theme (dark or light)
+    this._themeService.darkMode$.subscribe((mode: boolean) => this.isDarkMode = mode); // Watch changes in dark mode (reactive)
   }
 
 }
