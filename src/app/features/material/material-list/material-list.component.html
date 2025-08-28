@@ -24,7 +24,7 @@
               <button mat-menu-item [routerLink]="['/material', material.id, 'edit']">Modifier</button>
             }
             @if (role === 'ADMIN') {
-              <button mat-menu-item (click)="openDeleteDialog(material.id)">Supprimer</button>
+              <button mat-menu-item (click)="openDeleteDialog(material.id, material.nameMaterial)">Supprimer</button>
             }
           </mat-menu>
 

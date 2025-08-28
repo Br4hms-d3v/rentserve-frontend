@@ -106,9 +106,9 @@ export class MaterialListComponent implements OnInit {
     })
   }
 
-  openDeleteDialog(id: number) {
+  openDeleteDialog(id: number, nameMaterial: string) {
     this.dialog.open(MaterialDeleteComponent, {
-      data: {id: id}
+      data: {id: id, nameMaterial: nameMaterial}
     })
   }
 
