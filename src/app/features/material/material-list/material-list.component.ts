@@ -12,6 +12,7 @@ import {AuthService} from '../../../core/services/auth.service';
 import {MaterialByIdComponent} from '../material-by-id/material-by-id.component';
 import {MatDialog} from '@angular/material/dialog';
 import {RouterLink} from '@angular/router';
+import {MaterialDeleteComponent} from '../material-delete/material-delete.component';
 
 @Component({
   selector: 'app-material-list',
@@ -104,5 +105,12 @@ export class MaterialListComponent implements OnInit {
       data: {id: id}
     })
   }
+
+  openDeleteDialog(id: number) {
+    this.dialog.open(MaterialDeleteComponent, {
+      data: {id: id}
+    })
+  }
+
 
 }
