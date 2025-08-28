@@ -1,7 +1,7 @@
-import {CategoryDto} from '../../category/model/category';
+import {CategoryForm} from '../../category/model/categoryForm';
 
 export interface MaterialForm{
   nameMaterial: string;
-  category: CategoryDto;
+  category: CategoryForm;
   isAvailable: boolean;
 }

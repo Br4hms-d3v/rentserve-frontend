@@ -68,7 +68,38 @@ export class MaterialEditComponent implements OnInit {
       }
     })
 
+  }
 
+  onSubmitEditMaterial() {
+    this.editMaterialForm.markAsTouched();
+
+    if (this.editMaterialForm.invalid) {
+      return;
+    }
+
+    let editMaterial: MaterialForm = {
+      category: this.editMaterialForm.get('category')?.value,
+      nameMaterial: this.editMaterialForm.get('nameMaterial')?.value,
+      isAvailable: this.editMaterialForm.get('isAvailable')?.value
+    }
+    console.log(editMaterial);
+
+    this._materialService.editMaterial(this.materialId, editMaterial).subscribe({
+      next: (data) => {
+        this.updateMaterialForm = data;
+        this.editMaterialForm.patchValue(this.updateMaterialForm);
+        this.messageSuccess = 'La mise à jour a été effectué avec succès.'
+      },
+      error: (error) => {
+        if (typeof error.error) {
+          this.message = error.error.message;
+        } else if (error.error?.message) {
+          this.message = error.error.message;
+        } else {
+          this.message = 'Erreur lors de la mise à jour!;';
+        }
+      }
+    })
   }
 
 }

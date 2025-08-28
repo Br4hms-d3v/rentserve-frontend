@@ -1,7 +1,7 @@
 <div class="container-edit">
   <h1> Modification </h1>
 
-  <form [formGroup]="editMaterialForm">
+  <form [formGroup]="editMaterialForm" (ngSubmit)="onSubmitEditMaterial()">
     <p>
       <mat-form-field appearance="outline">
         <mat-label>Categorie:</mat-label>
