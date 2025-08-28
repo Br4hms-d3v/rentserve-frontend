@@ -1,0 +1,14 @@
+<div>
+  <h2 mat-dialog-title> Suppression du matériel </h2>
+
+  <mat-dialog-content>
+    <p>Êtes vous sûr de vouloir supprimer le matériel : <br>
+      <span>NOMMATERIEL</span>
+    </p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button > Retourn </button>
+    <button mat-raised-button (click)="onDeleteMaterial()"> Supprimer </button>
+  </mat-dialog-actions>
+</div>

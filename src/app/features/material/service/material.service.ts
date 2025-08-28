@@ -52,4 +52,9 @@ export class MaterialService {
     return this._http.put<MaterialForm>(this.apiUrl + '/' + id + '/edit', form, {headers})
   }
 
+  deleteMaterial(id: number | undefined) {
+    const headers = this.getAuthHeader();
+    return this._http.delete(this.apiUrl + '/' + id + '/delete', {headers})
+  }
+
 }
