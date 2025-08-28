@@ -2,13 +2,15 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MaterialService} from '../service/material.service';
 import {
   MAT_DIALOG_DATA,
-  MatDialogActions,
+  MatDialogActions, MatDialogClose,
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle
 } from '@angular/material/dialog';
 import {MatButton} from '@angular/material/button';
 import {Router} from '@angular/router';
+import {ThemeService} from '../../../core/services/theme.service';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-material-delete',
@@ -16,7 +18,9 @@ import {Router} from '@angular/router';
     MatDialogContent,
     MatDialogTitle,
     MatDialogActions,
-    MatButton
+    MatButton,
+    MatDialogClose,
+    NgClass
   ],
   templateUrl: './material-delete.component.html',
   styleUrl: './material-delete.component.scss'
@@ -24,19 +28,29 @@ import {Router} from '@angular/router';
 export class MaterialDeleteComponent implements OnInit {
 
   materialById!: number;
+  nameMaterial!: string;
   message: string = '';
   messageSuccess: string = '';
+  isDarkMode = false; // Store dark mode state (true or false)
 
   constructor(
     private readonly _materialService: MaterialService,
     private readonly _router: Router,
+    private readonly _themeService: ThemeService,
     private dialogRef: MatDialogRef<MaterialDeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.materialById = data.id;
+    this.nameMaterial = data.nameMaterial;
   }
 
   ngOnInit() {
+    this.getTheme();
+  }
+
+  getTheme() {
+    this.isDarkMode = this._themeService.isDarkMode(); // Get current theme (dark or light)
+    this._themeService.darkMode$.subscribe((mode: boolean) => this.isDarkMode = mode); // Watch changes in dark mode (reactive)
   }
 
   onDeleteMaterial() {
@@ -46,8 +60,14 @@ export class MaterialDeleteComponent implements OnInit {
           this.messageSuccess = 'Le matériel a été supprimé';
           this.closeDialog();
         },
-        error: () => {
-          this.message = 'Erreur lors de la suppression du matériel.';
+        error: (error) => {
+          if (typeof error.error) {
+            this.message = error.error.message;
+          } else if (error.error?.message) {
+            this.message = error.error.message;
+          } else {
+            this.message = 'Erreur lors de la suppression du matériel.';
+          }
         }
       }
     )
