@@ -1,11 +1,38 @@
+<!--<div class="container-edit">-->
+<!--  <h1> Modification </h1>-->
+
+<!--  <form>-->
+
+<!--    <mat-form-field>-->
+<!--      <input matInput [formControl]="materialForm" [matAutocomplete]="auto">-->
+<!--      <mat-autocomplete #auto="matAutocomplete">-->
+<!--        <mat-option *ngFor="let cat of filteredCategories | async" [value]="cat.nameCategory">-->
+<!--          {{ cat.nameCategory }}-->
+<!--        </mat-option>-->
+<!--      </mat-autocomplete>-->
+<!--    </mat-form-field>-->
+
+<!--  -->
+<!--    <button mat-raised-button type="submit">Modifier</button>-->
+<!--  </form>-->
+<!--</div>-->
+
 <div class="container-edit">
   <h1> Modification </h1>
 
   <form [formGroup]="editMaterialForm">
+
     <p>
       <mat-form-field appearance="outline">
-        <mat-label>Categorie:</mat-label>
-        <input matInput placeholder="Placeholder" formControlName="category">
+        <mat-label>Catégorie:</mat-label>
+
+        <input matInput type="text" formControlName="category">
+        <!--        <input matInput type="text" [matAutocomplete]="auto" formControlName="category">-->
+        <!--        <mat-autocomplete #auto="matAutocomplete">-->
+        <!--          <mat-option *ngFor="let category of filteredCategories | async" [value]="category.nameCategory">-->
+        <!--            {{ category.nameCategory }}-->
+        <!--          </mat-option>-->
+        <!--        </mat-autocomplete>-->
       </mat-form-field>
     </p>
 
