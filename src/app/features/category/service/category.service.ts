@@ -30,6 +30,11 @@ export class CategoryService {
   constructor(private readonly _http: HttpClient) {
   }
 
+  getCategories() {
+    const headers = this.getAuthHeader();
+    return this._http.get<CategoryDto[]>(this.apiUrl + '/list', {headers: headers})
+  }
+
   getCategoriesMaterial(): Observable<CategoryDto[]> {
     const headers = this.getAuthHeader();
     return this._http.get<CategoryDto[]>(this.apiUrl + '/material', {headers})
