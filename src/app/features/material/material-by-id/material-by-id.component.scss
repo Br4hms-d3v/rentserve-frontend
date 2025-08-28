@@ -1,0 +1,97 @@
+// Container dialog
+mat-dialog-content {
+  height: 190px;
+}
+
+// Title inside dialog
+h3 {
+  text-align: center;
+  padding-top: 15px;
+}
+
+// Paragraph inside dialog
+p {
+  text-align: center;
+  font-family: 'Libre Baskerville italic', serif;
+  font-size: 18px;
+}
+
+/**
+* Style for light mode
+ */
+.light-mode {
+
+  // Title dialog
+  h2[mat-dialog-title] {
+    background-color: #E0E0E0;
+    color: #545E4C;
+  }
+
+  // Container dialog
+  mat-dialog-content {
+    background-color: #f0f0f0;
+
+    h3 {
+      color: #6d7c5f;
+    }
+
+    p {
+      color: #545E4C;
+    }
+  }
+
+  // End of dialog
+  mat-dialog-actions {
+    background-color: #E0E0E0;
+
+    .btn-close-dialog {
+      background-color: #6d7c5f;
+      color: white;
+
+      &:active {
+        background-color: #4E9442;
+      }
+
+    }
+  }
+}
+
+/**
+ * Style for dark mode
+ **/
+.dark-mode {
+
+  // Title dialog
+  h2[mat-dialog-title] {
+    background-color: #2b2b2b;
+    color: #cbd1c1;
+  }
+
+  // Container dialog
+  mat-dialog-content {
+    background-color: #525252;
+
+    h3 {
+      color: #CCD5B9;
+    }
+
+    p {
+      color: #cbd1c1;
+    }
+  }
+
+  // End of dialog
+  mat-dialog-actions {
+    background-color: #2b2b2b;
+
+    .btn-close-dialog {
+      background-color: #CCD5B9;
+      color: black;
+
+      &:active {
+        background-color: #BaF2B5;
+      }
+
+    }
+  }
+}

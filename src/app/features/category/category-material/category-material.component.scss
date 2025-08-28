@@ -16,6 +16,17 @@ mat-form-field {
   width:90px;
 }
 
+// link to redirect to material
+#linkToMaterial{
+  text-decoration: none;
+  color: #2b2b2b;
+
+  &:hover {
+    color:#4E9442;
+    text-decoration: underline;
+  }
+}
+
 /* Change color for light mode */
 .light-mode-toolbar {
   th{
@@ -31,6 +42,7 @@ mat-form-field {
   table {
     background-color: #f0f0f0;
   }
+
 }
 
 /* Change color for dark mode */
@@ -50,4 +62,5 @@ mat-form-field {
   .mat-elevation-z8 {
     background-color: #2b2b2b;
   }
+
 }

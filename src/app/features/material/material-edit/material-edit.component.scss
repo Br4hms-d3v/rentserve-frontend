@@ -1,0 +1,63 @@
+@use '@angular/material' as mat;
+
+.container-edit{
+  height: 70vh;
+}
+
+h1{
+  margin-bottom:50px;
+  margin-top:50px;
+  text-align: center;
+  color: #6d7c5f;
+}
+
+.messageSuccess{
+  color: green;
+}
+
+.message p{
+  color:red;
+}
+
+.formEditMaterial{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/**
+* Style for light mode
+ */
+.light-mode {
+  // Color for form edit
+  .inputMatField {
+    @include mat.form-field-overrides((
+      outlined-outline-color: #6D7C5F,
+      outlined-focus-outline-color: #6D7C5F,
+      outlined-caret-color: #6D7C5F,
+      outlined-hover-outline-color: #6D7C5F,
+      outlined-label-text-color: #6D7C5F,
+      outlined-focus-label-text-color: #6D7C5F,
+      outlined-hover-label-text-color: #4E9442,
+      outlined-input-text-placeholder-color:#4E9442,
+      outlined-input-text-color: #545E4C,
+    ));
+  }
+
+  // Text activated next slide
+  .textSlideActivated{
+    color:green;
+  }
+
+  // Text deactivated next slide
+  .textSlideDeactivated{
+    color:red;
+  }
+
+  // Button to update material
+  button{
+    background-color: #FF9720;
+    color:white;
+  }
+}

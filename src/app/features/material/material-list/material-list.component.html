@@ -1,0 +1,49 @@
+<div class="cards-container" [ngClass]="{'dark-mode-toolbar': isDarkMode, 'light-mode-toolbar': !isDarkMode}">
+  <h1>Liste des materiels </h1>
+
+  @if (message) {
+    {{ message }}
+  }
+
+  <div class="cards">
+
+    @for (material of pagedMaterials; track material.id) {
+      <mat-card appearance="outlined" class="cards-material-category">
+        <mat-card-header>
+          <mat-card-title>{{ material.nameMaterial }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-actions align="end">
+          <div class="btn-menu">
+            <button mat-button [matMenuTriggerFor]="sousMenuMaterial">
+              <mat-icon>menu</mat-icon>
+            </button>
+          </div>
+          <mat-menu #sousMenuMaterial="matMenu">
+            <button mat-menu-item (click)="openDetailDialog(material.id)">Détailler</button>
+            @if (role === 'MODERATOR' || role === 'ADMIN') {
+              <button mat-menu-item [routerLink]="['/material', material.id, 'edit']">Modifier</button>
+            }
+            @if (role === 'ADMIN') {
+              <button mat-menu-item (click)="openDeleteDialog(material.id, material.nameMaterial)">Supprimer</button>
+            }
+          </mat-menu>
+
+          <span class="spacer"></span>
+
+          <div class="btn-show">
+            <button mat-button>Voir</button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    }
+  </div>
+
+</div>
+<div [ngClass]="{'dark-mode-toolbar': isDarkMode, 'light-mode-toolbar': !isDarkMode}">
+  <mat-paginator class="pagination"
+                 [length]="materials.length"
+                 [pageSize]="pageSize"
+                 (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>

@@ -11,6 +11,10 @@ export const routes: Routes = [
   },
   {
     path: 'category',
-    loadChildren: () => import('./features/category/category.routes').then(r=> r.category_routes)
+    loadChildren: () => import('./features/category/category.routes').then(r => r.category_routes)
+  },
+  {
+    path: 'material',
+    loadChildren: () => import('./features/material/material.routes').then(r => r.material_routes)
   }
 ];
