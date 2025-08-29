@@ -13,6 +13,9 @@ import {MaterialByIdComponent} from '../material-by-id/material-by-id.component'
 import {MatDialog} from '@angular/material/dialog';
 import {RouterLink} from '@angular/router';
 import {MaterialDeleteComponent} from '../material-delete/material-delete.component';
+import {
+  FilterSearchMaterialComponent
+} from '../../../shared/material/filter-search-material/filter-search-material.component';
 
 @Component({
   selector: 'app-material-list',
@@ -27,6 +30,7 @@ import {MaterialDeleteComponent} from '../material-delete/material-delete.compon
     NgClass,
     MatIcon,
     RouterLink,
+    FilterSearchMaterialComponent,
   ],
   templateUrl: './material-list.component.html',
   styleUrl: './material-list.component.scss'
