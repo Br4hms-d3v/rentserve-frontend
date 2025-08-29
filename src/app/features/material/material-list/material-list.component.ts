@@ -15,6 +15,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SearchMaterialPipe} from '../../../core/pipes/search-material.pipe';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-material-list',
@@ -32,7 +34,9 @@ import {SearchMaterialPipe} from '../../../core/pipes/search-material.pipe';
     ReactiveFormsModule,
     FormsModule,
     SearchMaterialPipe,
-    SearchMaterialPipe,
+    MatFormFieldModule,
+    MatInputModule
+
   ],
   templateUrl: './material-list.component.html',
   styleUrl: './material-list.component.scss'
@@ -147,7 +151,6 @@ export class MaterialListComponent implements OnInit {
     // Affichage du mode de tri dans la console (pour débogage)
     console.log('Sort order:', this.sort);
   }
-
 
 
 }

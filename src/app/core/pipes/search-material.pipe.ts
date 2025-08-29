@@ -31,5 +31,3 @@ export class SearchMaterialPipe implements PipeTransform {
   }
 
 }
-
-
