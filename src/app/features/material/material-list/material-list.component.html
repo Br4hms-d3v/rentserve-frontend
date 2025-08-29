@@ -5,12 +5,14 @@
     {{ message }}
   }
 
-<app-filter-search-material></app-filter-search-material>
-
+  <div>
+    <input type="search" [(ngModel)]="searchMaterial" placeholder="search">
+    <button type="button" (click)="onSort()">trie</button>
+  </div>
 
   <div class="cards">
 
-    @for (material of pagedMaterials; track material.id) {
+    @for (material of pagedMaterials | searchMaterialFilter:searchMaterial; track material.nameMaterial) {
       <mat-card appearance="outlined" class="cards-material-category">
         <mat-card-header>
           <mat-card-title>{{ material.nameMaterial }}</mat-card-title>

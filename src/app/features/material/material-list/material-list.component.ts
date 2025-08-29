@@ -1,36 +1,38 @@
 import {Component, OnInit} from '@angular/core';
 import {MaterialDto} from '../model/material';
 import {MaterialService} from '../service/material.service';
-import {MatCard, MatCardActions, MatCardHeader, MatCardTitle} from '@angular/material/card';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {ThemeService} from '../../../core/services/theme.service';
 import {NgClass} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {AuthService} from '../../../core/services/auth.service';
 import {MaterialByIdComponent} from '../material-by-id/material-by-id.component';
 import {MatDialog} from '@angular/material/dialog';
-import {RouterLink} from '@angular/router';
 import {MaterialDeleteComponent} from '../material-delete/material-delete.component';
-import {
-  FilterSearchMaterialComponent
-} from '../../../shared/material/filter-search-material/filter-search-material.component';
+import {MatCard, MatCardActions, MatCardHeader, MatCardTitle} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {RouterLink} from '@angular/router';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {SearchMaterialPipe} from '../../../core/pipes/search-material.pipe';
 
 @Component({
   selector: 'app-material-list',
   imports: [
-    MatCard,
-    MatCardActions,
-    MatCardHeader,
-    MatCardTitle,
-    MatPaginator,
     MatButtonModule,
     MatMenuModule,
-    NgClass,
-    MatIcon,
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardActions,
+    MatIconModule,
     RouterLink,
-    FilterSearchMaterialComponent,
+    NgClass,
+    MatPaginator,
+    ReactiveFormsModule,
+    FormsModule,
+    SearchMaterialPipe,
+    SearchMaterialPipe,
   ],
   templateUrl: './material-list.component.html',
   styleUrl: './material-list.component.scss'
@@ -41,9 +43,12 @@ export class MaterialListComponent implements OnInit {
   message = '';
   role: string | undefined;
 
-  pagedMaterials: any[] = [];
+  pagedMaterials: MaterialDto[] = [];
   pageSize = 25;
   pageIndex = 0;
+
+  searchMaterial: string = '';
+  sort: string = 'asc';
 
   isDarkMode = false;
 
@@ -115,6 +120,34 @@ export class MaterialListComponent implements OnInit {
       data: {id: id, nameMaterial: nameMaterial}
     })
   }
+
+  onSort() {
+    // Si l'ordre de tri est ascendant, on passe à l'ordre descendant
+    if (this.sort === 'asc') {
+      this.sort = 'desc';
+
+      // Tri des matériaux par nom (ordre décroissant)
+      this.materials.sort((a, b) => {
+        return b.nameMaterial.localeCompare(a.nameMaterial); // Tri décroissant
+      });
+
+    } else {
+      // Si l'ordre de tri est descendant, on passe à l'ordre ascendant
+      this.sort = 'asc';
+
+      // Tri des matériaux par nom (ordre croissant)
+      this.materials.sort((a, b) => {
+        return a.nameMaterial.localeCompare(b.nameMaterial); // Tri croissant
+      });
+    }
+
+    // Recalcule les matériaux paginés après le tri
+    this.paginatorMaterials();
+
+    // Affichage du mode de tri dans la console (pour débogage)
+    console.log('Sort order:', this.sort);
+  }
+
 
 
 }
