@@ -42,6 +42,29 @@ h1 {
   justify-content: center;
 }
 
+// Div with search, sort and create new material
+.container-search-filter {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 68%;
+  border-radius: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  mat-form-field {
+    padding-top: 15px;
+    width: 300px;
+  }
+
+  /* To make sure the buttons are in the middle. */
+  .spacer {
+    flex: 1 1 auto;
+  }
+}
+
 /* Change color for light mode */
 .light-mode-toolbar {
 
@@ -111,6 +134,31 @@ h1 {
       enabled-icon-color: #19435a,
       container-text-size: 14px,
     ))
+  }
+
+  .container-search-filter{
+    background-color: #E0E0E0;
+  }
+
+  // Buttons for sort and new material
+  .btn-filter-new {
+    background-color: #6d7c5f;
+    color: white;
+  }
+
+  // Search material
+  .searchMat{
+    @include mat.form-field-overrides((
+      outlined-outline-color: #4E9442,
+      outlined-focus-outline-color: #4E9442,
+      outlined-caret-color: #4E9442,
+      outlined-hover-outline-color: #4E9442,
+      outlined-label-text-color: #545E4C,
+      outlined-focus-label-text-color: #545E4C,
+      outlined-hover-label-text-color: #545E4C,
+      outlined-input-text-placeholder-color:#4E9442,
+      outlined-input-text-color: #545E4C,
+    ));
   }
 
 
@@ -185,6 +233,31 @@ h1 {
       enabled-icon-color: #387190,
       container-text-size: 14px,
     ))
+  }
+
+  .container-search-filter{
+    background-color: #525252;
+  }
+
+  // Buttons for sort and new material
+  .btn-filter-new {
+    background-color: #ccd5b9;
+    color: black;
+  }
+
+  // Search material
+  .searchMat{
+    @include mat.form-field-overrides((
+      outlined-outline-color: #BaF2B5,
+      outlined-focus-outline-color: #BaF2B5,
+      outlined-caret-color: #BaF2B5,
+      outlined-hover-outline-color: #BaF2B5,
+      outlined-label-text-color: #cbd1c1,
+      outlined-focus-label-text-color: #cbd1c1,
+      outlined-hover-label-text-color: #cbd1c1,
+      outlined-input-text-placeholder-color:#BaF2B5,
+      outlined-input-text-color: #cbd1c1,
+    ));
   }
 
 }

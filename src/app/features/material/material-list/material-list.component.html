@@ -5,9 +5,31 @@
     {{ message }}
   }
 
+  <div class="container-search-filter">
+    <!--    <input type="search" [(ngModel)]="searchMaterial" placeholder="search">-->
+    <mat-form-field appearance="outline" class="searchMat">
+      <mat-label>Rechercher</mat-label>
+      <input matInput [(ngModel)]="searchMaterial" placeholder="Entrez un matériel">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <span class="spacer"></span>
+
+    <button mat-raised-button (click)="onSort()" class="btn-filter-new">Trier
+      <mat-icon>sort_by_alpha</mat-icon>
+    </button>
+
+    <span class="spacer"></span>
+
+    <button mat-raised-button [routerLink]="['/material/create/new-material']" class="btn-filter-new"> Créer un nouveau matériel
+      <mat-icon>construction</mat-icon>
+    </button>
+
+    <!--    <button type="button" mat-button="outlined" (click)="onSort()" >Trier  <mat-icon matSuffix>sort_by_alpha</mat-icon></button>-->
+  </div>
   <div class="cards">
 
-    @for (material of pagedMaterials; track material.id) {
+    @for (material of pagedMaterials | searchMaterialFilter:searchMaterial; track material.nameMaterial) {
       <mat-card appearance="outlined" class="cards-material-category">
         <mat-card-header>
           <mat-card-title>{{ material.nameMaterial }}</mat-card-title>
